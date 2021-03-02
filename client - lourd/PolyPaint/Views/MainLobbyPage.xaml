@@ -1,0 +1,343 @@
+﻿<UserControl x:Class="PolyPaint.Views.MainLobbyPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PolyPaint.Views"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:gif="http://wpfanimatedgif.codeplex.com"
+        xmlns:converters="clr-namespace:FMUD.Converters"
+             xmlns:local1="clr-namespace:FMUD.Views"
+             mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <converters:JoinEnabledConverter x:Key="JoinEnabledConverter"></converters:JoinEnabledConverter>
+        <converters:JoinEnabledGreyscaleConverter x:Key="JoinEnabledGreyscaleConverter"></converters:JoinEnabledGreyscaleConverter>
+        <converters:MatchModeToColorConverter x:Key="MatchModeToColorConverter"></converters:MatchModeToColorConverter>
+        <converters:MatchModeToToolTipConverter x:Key="MatchModeToToolTipConverter"></converters:MatchModeToToolTipConverter>
+    </UserControl.Resources>
+    <Grid>
+
+        <materialDesign:ColorZone Background="White" Grid.ZIndex ="1" Mode="Light" VerticalAlignment="Stretch">
+            <materialDesign:Transitioner x:Name="Transitioner" SelectedIndex="0">
+                <!--Main page-->
+                <DockPanel Margin="5">
+                    <!--Menu-->
+
+                    <Border DockPanel.Dock="Top" BorderThickness="0" Grid.ZIndex="2"  Height="350">
+                        <Border.Effect>
+                            <DropShadowEffect Color="Gray" ShadowDepth="3"/>
+                        </Border.Effect>
+                        <Grid DockPanel.Dock="Top" Height="350">
+                            <Image Grid.ZIndex ="0" Height="1700" gif:ImageBehavior.AnimatedSource="../Resources/lobby.gif" />
+
+                            <TextBlock Style="{StaticResource MaterialDesignHeadline1TextBlock}" FontWeight="UltraBlack" HorizontalAlignment="Center" Foreground="White" DockPanel.Dock="Top" Margin="0 100 0 0">
+                        draw me something
+                            </TextBlock>
+                            <Separator  Margin="300 120 300 20" Style="{StaticResource MaterialDesignLightSeparator}"></Separator>
+                            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="0 250 0 50">
+                                <!--Tutorial-->
+                                <StackPanel Orientation="Vertical" Margin="0 0 30 0">
+                                    <TextBlock Foreground="White" Margin="0 0 0 -5" Style="{StaticResource MaterialDesignCaptionTextBlock}" HorizontalAlignment="Center">Tutorial</TextBlock>
+                                    <Button HorizontalAlignment="Center"  Style="{DynamicResource MaterialDesignToolButton}" Height="32" Width="32" Click="Tutorial_Click">
+                                        <materialDesign:PackIcon Foreground="White" Kind="HelpCircle" Height="25" Width="25"/>
+                                    </Button>
+                                </StackPanel>
+                                <!--Game creation-->
+                                <StackPanel Orientation="Vertical" Margin="0 0 30 0">
+                                    <TextBlock Foreground="White" Margin="0 0 0 -5" Style="{StaticResource MaterialDesignCaptionTextBlock}" HorizontalAlignment="Center">Contribute</TextBlock>
+                                    <Button Click="GameCreationButton_Click" HorizontalAlignment="Center"  Style="{DynamicResource MaterialDesignToolButton}" Height="32" Width="32">
+                                        <materialDesign:PackIcon Foreground="White" Kind="Drawing" Height="25" Width="25"/>
+                                    </Button>
+                                </StackPanel>
+                                <!--Party creation-->
+                                <StackPanel Orientation="Vertical" Margin="0 0 30 0">
+                                    <TextBlock Foreground="White" Margin="0 0 0 -5" Style="{StaticResource MaterialDesignCaptionTextBlock}" HorizontalAlignment="Center">Create a party</TextBlock>
+                                    <Button HorizontalAlignment="Center"  Style="{DynamicResource MaterialDesignToolButton}" Height="32" Width="32" Click="CreateParty_Click">
+                                        <materialDesign:PackIcon Foreground="White" Kind="AddToPhotos" Height="25" Width="25"/>
+                                    </Button>
+                                </StackPanel>
+                                <!--Parties filter-->
+                                <StackPanel Orientation="Vertical" Margin="0 0 30 0">
+                                    <TextBlock Foreground="White" Margin="0 0 0 -5" Style="{StaticResource MaterialDesignCaptionTextBlock}" HorizontalAlignment="Center">Filter parties</TextBlock>
+                                    <Button HorizontalAlignment="Center"  Style="{DynamicResource MaterialDesignToolButton}" Height="32" Width="32" Click="FilterParty_Click">
+                                        <materialDesign:PackIcon Foreground="White" Kind="FilterMenu" Height="25" Width="25"/>
+                                    </Button>
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+
+                    <!--Parties container-->
+                    <Grid>
+
+                        <ListView BorderThickness="0" ItemsSource="{Binding allParties}" >
+                            
+
+                            <ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Width="1000"/>
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+                            <ListBox.Style>
+                                <Style TargetType="{x:Type ListBox}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=Items.Count,
+                    RelativeSource={RelativeSource Self}}"  Value="0">
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate>
+                                                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Opacity="0.5" Style="{StaticResource MaterialDesignHeadline4TextBlock}">No parties yet... ☹</TextBlock>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ListBox.Style>
+
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Vertical">
+                                        <materialDesign:Card Width="400" Margin="30">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="200" />
+                                                    <RowDefinition Height="80" />
+                                                    <RowDefinition Height="50" />
+                                                </Grid.RowDefinitions>
+                                                <!--Background image-->
+                                                <Image Grid.Row="0" Stretch="UniformToFill">
+                                                    <Image.Source>
+                                                        <MultiBinding Converter="{StaticResource JoinEnabledGreyscaleConverter}">
+                                                            <Binding Path="playersCount" />
+                                                            <Binding Path="playerCapacity" />
+                                                            <Binding Path="started"/>
+                                                        </MultiBinding>
+                                                    </Image.Source>
+                                                </Image>
+                                                <!--Party name-->
+                                                <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Foreground="White" FontSize="200" FontWeight="ExtraBlack" Text="{Binding name}" Height="200"/>
+
+                                                <!--Party mode-->
+                                                <Button ToolTipService.InitialShowDelay="0" ToolTip="{Binding mode, Converter={StaticResource MatchModeToToolTipConverter}}" Background="{Binding mode, Converter={StaticResource MatchModeToColorConverter}}" Grid.Row="0" Style="{StaticResource MaterialDesignIconButton}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 16 -30" Height="60" Width="60">
+                                                    <Button.IsEnabled>
+                                                        <MultiBinding Converter="{StaticResource JoinEnabledConverter}">
+                                                            <Binding Path="playersCount" />
+                                                            <Binding Path="playerCapacity" />
+                                                            <Binding Path="started"/>
+                                                        </MultiBinding>
+                                                    </Button.IsEnabled>
+                                                    <TextBlock Text="{Binding mode}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Foreground="White"/>
+                                                </Button>
+
+                                                <!--Party details-->
+                                                <StackPanel Grid.Row="1" Margin="10 15 10 0">
+                                                    <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}" FontWeight="Bold" Text="{Binding name}"/>
+
+                                                </StackPanel>
+
+                                                <!--Party players-->
+                                                <DockPanel Grid.Row="2" Margin="10">
+                                                    <materialDesign:PopupBox Margin="5 0 10 0" DockPanel.Dock="Left"
+                                                  PlacementMode="BottomAndAlignCentres" IsEnabled="True">
+                                                        <materialDesign:PopupBox.ToggleContent>
+                                                            <materialDesign:PackIcon Width="20" Height="20" Foreground="DarkOrange" Kind="AccountSupervisor" />
+                                                        </materialDesign:PopupBox.ToggleContent>
+                                                        <ListView x:Name="playersList" ItemsSource="{Binding players}">
+                                                            <ListBox.ItemTemplate>
+                                                                <DataTemplate>
+                                                                    <StackPanel>
+                                                                        <TextBlock  FontSize="12" Padding="0" Text="{Binding id}" />
+                                                                    </StackPanel>
+                                                                </DataTemplate>
+                                                            </ListBox.ItemTemplate>
+                                                        </ListView>
+                                                    </materialDesign:PopupBox>
+                                                    <TextBlock DockPanel.Dock="Left"  Style="{StaticResource MaterialDesignBody2TextBlock}" Text="{Binding playersCount}"  TextWrapping="Wrap" VerticalAlignment="Center"/>
+                                                    <TextBlock DockPanel.Dock="Left" Style="{StaticResource MaterialDesignBody2TextBlock}" Text=" / "  TextWrapping="Wrap" VerticalAlignment="Center"/>
+                                                    <TextBlock DockPanel.Dock="Left" Style="{StaticResource MaterialDesignBody2TextBlock}" Text="{Binding playerCapacity}"  TextWrapping="Wrap" VerticalAlignment="Center"/>
+
+                                                    <!--Party join button-->
+                                                    <Button DockPanel.Dock="Right" Margin="0 -25 19 10" Style="{StaticResource MaterialDesignToolButton}" materialDesign:RippleAssist.IsCentered="True" Tag="{Binding id}" Click="PartyJoinButton_Click">
+                                                        <Button.IsEnabled>
+                                                            <MultiBinding Converter="{StaticResource JoinEnabledConverter}">
+                                                                <Binding Path="playersCount" />
+                                                                <Binding Path="playerCapacity" />
+                                                                <Binding Path="started"/>
+                                                            </MultiBinding>
+                                                        </Button.IsEnabled>
+                                                        <Button.RenderTransform>
+                                                            <ScaleTransform CenterX="0" CenterY="0" ScaleX="2" ScaleY="2"/>
+                                                        </Button.RenderTransform>
+                                                        <materialDesign:PackIcon Kind="ArrowRight" />
+                                                    </Button>
+                                                </DockPanel>
+                                            </Grid>
+                                        </materialDesign:Card>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+
+
+
+                        </ListView>
+
+                    </Grid>
+
+                </DockPanel>
+
+                <!--Party lobby page-->
+                <local:PartyLobbyUC Grid.ZIndex ="1" DataContext="{Binding CurrentDataContext}" LeaveLobby="PartyLobby_Left" x:Name="PartyLobby"/>
+
+                <!--Live game page-->
+                <!--...-->
+            </materialDesign:Transitioner>
+        </materialDesign:ColorZone>
+
+        <!--Party creation dialog-->
+        <materialDesign:DialogHost Grid.ZIndex ="1" Name="PartyCreationDialog" CloseOnClickAway="True">
+            <materialDesign:DialogHost.DialogContent>
+                
+                <StackPanel Orientation="Vertical" Width="570">
+                    <StackPanel.Background>
+                        <ImageBrush ImageSource="../Resources/abstract3.png"></ImageBrush>
+                    </StackPanel.Background>
+                    <!--Header-->
+                    <TextBlock FontWeight="UltraBold" Foreground="White" Margin="0 50 0 0" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignHeadline3TextBlock}"> Create a party
+                    </TextBlock>
+                    <materialDesign:Card Margin="50 20 50 20">
+                        <StackPanel>
+                            <!--Party name-->
+                            <TextBox x:Name="PartyName" Margin="120 25 120 15"
+                          materialDesign:HintAssist.Hint="Party name"
+                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                          VerticalAlignment="Center" />
+                            <!--Difficulty
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
+                                <Label VerticalAlignment="Center" Margin="0,37,0,0">Level of difficulty</Label>
+                                <Slider ValueChanged="Difficulty_Changed" VerticalAlignment="Center" Style="{StaticResource MaterialDesignDiscreteHorizontalSlider}" Margin="0" Minimum="1" Maximum="3" TickFrequency="1" x:Name="Difficulty" Width="100"/>
+                            </StackPanel>
+                            <TextBlock Margin="0 0 0 10" Foreground="{StaticResource MaterialDesignBodyLight}" HorizontalAlignment="Center" x:Name="DifficultyDescription"
+                    Style="{StaticResource MaterialDesignCaptionTextBlock}">
+                        The virtual player(s) will draw simple drawings
+                            </TextBlock>-->
+
+                            <!--Game mode-->
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Label Margin="0 10 0 0" VerticalAlignment="Center">Mode</Label>
+                                <ComboBox SelectionChanged="Mode_Changed" VerticalAlignment="Center" SelectedIndex="0" HorizontalAlignment="Center" Margin="15, 15 ,0, 10" Name="GameMode">
+                                    <ComboBoxItem Tag="1">Free-for-all</ComboBoxItem>
+                                    <ComboBoxItem Tag="2">Solo sprint</ComboBoxItem>
+                                    <ComboBoxItem Tag="3">Cooperative sprint</ComboBoxItem>
+                                </ComboBox>
+
+                            </StackPanel>
+                            <TextBlock TextAlignment="Center" TextWrapping="Wrap" Foreground="{StaticResource MaterialDesignBodyLight}"  Margin="60 0 60 35" HorizontalAlignment="Center" x:Name="ModeDescription"
+                    Style="{StaticResource MaterialDesignCaptionTextBlock}">
+                        In this mode, you will compete against other players to earn as many points as possible.
+                            </TextBlock>
+
+                            <!--Platform
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+
+                                <Label VerticalAlignment="Center" Margin="0 10 0 0">Cross-platform</Label>
+                                <ComboBox SelectionChanged="Platform_Changed" VerticalAlignment="Center" SelectedIndex="0" HorizontalAlignment="Center" Margin="15, 15 ,0, 10" Name="Platform">
+                                    <ComboBoxItem Tag="0">All platforms</ComboBoxItem>
+                                    <ComboBoxItem Tag="1">PC only</ComboBoxItem>
+                                </ComboBox>
+                            </StackPanel>
+
+                            <TextBlock Foreground="{StaticResource MaterialDesignBodyLight}" Margin="0 0 0 20" HorizontalAlignment="Center" x:Name="PlatformsDescription"
+                    Style="{StaticResource MaterialDesignCaptionTextBlock}">
+                        PCs and tablets are allowed in this party
+                            </TextBlock>-->
+                        </StackPanel>
+                    </materialDesign:Card>
+
+
+
+
+                    <!--Creation button-->
+                    <Button Height="35" Foreground="White" Style="{StaticResource MaterialDesignRaisedAccentButton}" Width="80" Margin="0,10,0,30" x:Name="PartyCreationSubmitBtn" Click="SubmitPartyCreation_Click">
+                        Create
+                    </Button>
+                </StackPanel>
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
+
+        <!--Tutorial dialog-->
+        <materialDesign:DialogHost Grid.ZIndex ="1" Name="TutorialDialog" CloseOnClickAway="True" DialogClosing="resetWhenTutorialClosed">
+            <materialDesign:DialogHost.DialogContent>
+
+                <local1:TutorialDialogContentUC Grid.ZIndex ="1" x:Name="TutorialUC"/>
+
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
+
+        <!--Party filtering dialog-->
+        <materialDesign:DialogHost Grid.ZIndex ="1" Name="PartyFilteringDialog" CloseOnClickAway="True">
+            <materialDesign:DialogHost.DialogContent>
+                <StackPanel Orientation="Vertical" Width="550" Height="350">
+                    <StackPanel.Background>
+                        <ImageBrush ImageSource="../Resources/abstract4.png"></ImageBrush>
+                    </StackPanel.Background>
+                    <!--Header-->
+                    <TextBlock FontWeight="UltraBold" Foreground="White" Margin="0 50 0 10" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignHeadline3TextBlock}"> Filter parties
+                    </TextBlock>
+                    <materialDesign:Card Margin="50 20 50 20">
+                        <StackPanel>
+                            <!--Game mode-->
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Label Margin="0 10 0 0" VerticalAlignment="Center">Mode</Label>
+                                <ComboBox SelectionChanged="Mode_Changed_Filter" VerticalAlignment="Center" SelectedIndex="3" HorizontalAlignment="Center" Margin="15, 15 ,0, 10" x:Name="GameModeFilter" >
+                                    <ComboBoxItem Tag="1">Free-For-All</ComboBoxItem>
+                                    <ComboBoxItem Tag="2">Solo</ComboBoxItem>
+                                    <ComboBoxItem Tag="3">Cooperative</ComboBoxItem>
+                                    <ComboBoxItem Tag="4">All</ComboBoxItem>
+                                </ComboBox>
+
+                            </StackPanel>
+                            <TextBlock TextAlignment="Center" TextWrapping="Wrap" Foreground="{StaticResource MaterialDesignBodyLight}"  Margin="60 0 60 10" HorizontalAlignment="Center" x:Name="ModeDescriptionFilter" 
+                                       Style="{StaticResource MaterialDesignCaptionTextBlock}" Height="45">
+                                Show all parties.
+                            </TextBlock>
+
+                            <!--Platform
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+
+                                <Label VerticalAlignment="Center" Margin="0 10 0 0">Cross-platform</Label>
+                                <ComboBox SelectionChanged="Platform_Changed_Filter" VerticalAlignment="Center" SelectedIndex="0" HorizontalAlignment="Center" Margin="15, 15 ,0, 10" x:Name="PlatformFilter">
+                                    <ComboBoxItem Tag="0">All platforms</ComboBoxItem>
+                                    <ComboBoxItem Tag="1">PC only</ComboBoxItem>
+                                    <ComboBoxItem Tag="2">Tablet only</ComboBoxItem>
+                                </ComboBox>
+                            </StackPanel>
+
+                            <TextBlock Foreground="{StaticResource MaterialDesignBodyLight}" Margin="0 0 0 20" HorizontalAlignment="Center" x:Name="PlatformsDescriptionFilter"
+                    Style="{StaticResource MaterialDesignCaptionTextBlock}">
+                        PCs and tablets are allowed in this party
+                            </TextBlock>-->
+                        </StackPanel>
+                    </materialDesign:Card>
+
+
+
+
+                    <!--Creation button-->
+                    <Button Height="35" Foreground="White" Style="{StaticResource MaterialDesignRaisedAccentButton}" Width="80" Margin="0,0,0,10" Click="SubmitPartyFilter_Click">
+                        Filter
+                    </Button>
+                </StackPanel>
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
+
+        <!--The snack bar-->
+        <materialDesign:Snackbar Grid.ZIndex ="1" HorizontalAlignment="Center"  Name="Snackbar">
+            <materialDesign:SnackbarMessage
+                Content="Game created succesfully. Thank you for contributing!"
+                ActionContent="OK"
+                ActionClick="SnackbarMessage_ActionClick"/>
+        </materialDesign:Snackbar>
+    </Grid>
+</UserControl>

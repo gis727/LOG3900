@@ -1,0 +1,141 @@
+﻿<UserControl
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:converters="clr-namespace:FMUD.Converters"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="FMUD.FenetreDessin"
+        mc:Ignorable="d"
+        Background="LightGray" MinWidth="627" MinHeight="200">
+    <UserControl.Resources>
+        <converters:ConvertisseurBordure x:Key="convertisseurBordure" />
+        <converters:ConvertisseurCouleurFond x:Key="convertisseurCouleurFond" />
+        <converters:ConvertisseurModeEdition x:Key="convertisseurModeEdition" />
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </UserControl.Resources>
+    <Grid>
+        <DockPanel>
+        
+            <Border DockPanel.Dock="Top" BorderThickness="0">
+
+                <ToolBarTray DockPanel.Dock="Top" Name="allOptions">
+                    <ToolBar Style="{DynamicResource MaterialDesignToolBar}" ClipToBounds="False">
+                        <!--Button to save the drawing-->
+                        <Button Name="SaveButton" ToolTip="Save" Click="SaveButton_Click">
+                            <materialDesign:PackIcon Kind="ContentSave" />
+                        </Button>
+                    
+                        <!--Button to view the drawing (being drawn by a VP)-->
+                        <Button ToolTipService.InitialShowDelay="0" Name="seeDrawingButton" ToolTip="Preview drawing" Click="seeDrawing_Click">
+                            <materialDesign:PackIcon Kind="Timelapse" />
+                        </Button>
+
+                        <!--Button to save the drawing as the avatar's image-->
+                        <Button ToolTipService.InitialShowDelay="0" Name="saveAsAvatarButton" ToolTip="Save as avatar" Click="saveAsAvatarButton_Click">
+                            <materialDesign:PackIcon Kind="FaceProfile" />
+                        </Button>
+                    
+                        <Separator/>
+
+                        <ListBox x:Name="OutilsList" SelectedIndex="0" SelectionChanged="SelectionOutilsChanged">
+                            <ListBoxItem Selected="OutilCrayonSelected">
+                                <materialDesign:PackIcon ToolTipService.InitialShowDelay="0" Kind="Pencil" />
+                            </ListBoxItem>
+                            <ListBoxItem Selected="OutilEffaceSegmentSelected">
+                                <materialDesign:PackIcon Kind="Eraser" />
+                            </ListBoxItem>
+                            <ListBoxItem Selected="OutilEffaceTraitSelected">
+                                <materialDesign:PackIcon Kind="PencilRemove" />
+                            </ListBoxItem>
+                        </ListBox>
+                    
+                        <Separator/>
+
+                        <ListBox SelectedIndex="0" x:Name="PointeList" SelectionChanged="SelectionPointeChanged">
+                            <ListBoxItem Selected="PointeRondeSelected">
+                                <materialDesign:PackIcon Kind="CircleMedium" />
+                            </ListBoxItem>
+
+                            <ListBoxItem Selected="PointeCarreSelected">
+                                <materialDesign:PackIcon Kind="SquareMedium"/>
+                            </ListBoxItem>
+                        </ListBox>
+
+                        <Slider Width="100" Height="26" Minimum="1" Maximum="50"
+                            Value="{Binding Path=TailleTrait, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                            Margin="12"                      
+                            TickFrequency="10" TickPlacement="BottomRight" IsSnapToTickEnabled="False">
+                        </Slider>
+                        <xctk:ColorPicker x:Name="selecteurCouleur2"
+                          VerticalContentAlignment="Stretch"
+                          Background="#00000000"
+                          ShowDropDownButton="False"
+                  
+                          ShowRecentColors="True"
+                          BorderBrush="#80000000"
+                          Margin="5,0,0,0" Width="39" Height="38"
+                          SelectedColor="{Binding Path=CouleurSelectionnee, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                          AvailableColorsHeader="Palette"
+                          StandardColorsHeader="Couleurs de base"
+                          RecentColorsHeader="Récemment utilisées"
+                          UsingAlphaChannel="True"/>
+                    </ToolBar>
+                </ToolBarTray>
+            </Border>
+
+
+            <!--<Border DockPanel.Dock="Bottom" Height="25" BorderThickness="0,0.75,0,0.75" BorderBrush="#77000000">
+                <StackPanel Orientation="Horizontal" Background="#FFF0F0F0">
+                    <Image Source="/Resources/position.png" Margin="5,5,5,5" VerticalAlignment="Center"/>
+                    <TextBlock Name="textBlockPosition" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                </StackPanel>
+            </Border>-->
+
+            <Grid DockPanel.Dock="Left" Margin="0,1,0,1" >
+                <Border BorderThickness="5,5,5,5" >
+                    <Grid Margin="0" ClipToBounds="True">
+                        <Grid Margin="0" Height="540" ClipToBounds="True" Name="CanvasGrid">
+                            <InkCanvas ClipToBounds="True" Grid.Column="0" Grid.Row="0" Name="surfaceDessin"
+                                   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"                                                              
+                                   Strokes="{Binding Path=Traits, Mode=OneTime}" EditingMode="{Binding Path=OutilSelectionne, Converter={StaticResource convertisseurModeEdition}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                                   DefaultDrawingAttributes="{Binding Path=AttributsDessin, Mode=OneTime}"
+                                   StrokeCollected="surfaceDessin_StrokeCollected" Height="540"/>
+                            <Rectangle Grid.Column="0" Grid.Row="0" x:Name="panoramicCurtain" Fill="White" Visibility="Collapsed"/>
+                            <Ellipse Margin="0" x:Name="outInCurtain" Visibility="Hidden" Fill="White" ClipToBounds="True">
+                                <Ellipse.OpacityMask>
+                                    <DrawingBrush>
+                                        <DrawingBrush.Drawing>
+                                            <GeometryDrawing>
+                                                <GeometryDrawing.Brush>
+                                                    <SolidColorBrush Color="Black"></SolidColorBrush>
+                                                </GeometryDrawing.Brush>
+                                                <GeometryDrawing.Geometry>
+                                                    <GeometryGroup FillRule="EvenOdd" >
+                                                        <RectangleGeometry Rect="0,0,100,100" />
+                                                        <EllipseGeometry Center="50,50"/>
+                                                    </GeometryGroup>
+                                                </GeometryDrawing.Geometry>
+                                                <GeometryDrawing.Pen>
+                                                    <Pen Thickness="0" Brush="Black" />
+                                                </GeometryDrawing.Pen>
+                                            </GeometryDrawing>
+                                        </DrawingBrush.Drawing>
+                                    </DrawingBrush>
+                                </Ellipse.OpacityMask>
+                            </Ellipse>
+                        </Grid>
+                    </Grid>
+                    <Border.Effect>
+                        <DropShadowEffect Opacity="0.3" BlurRadius="10"/>
+                    </Border.Effect>
+                </Border>
+            </Grid>
+
+        </DockPanel>
+        
+        <!--Progress bar-->
+        <ProgressBar Style="{StaticResource MaterialDesignCircularProgressBar}" Foreground="Red" Width="100" Value="0" IsIndeterminate="True" Margin="0 0 0 0" Name="MatProgress" Visibility="Collapsed"/>
+    </Grid>
+</UserControl>

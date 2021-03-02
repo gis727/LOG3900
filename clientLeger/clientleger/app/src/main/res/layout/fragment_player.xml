@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/player_avatar"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
+        android:src="@drawable/realavatar"
+        android:scaleType="centerInside" />
+    <TextView
+        android:id="@+id/player_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/text_margin"
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:text="TEXTEXTEXTEXT"/>
+
+    <TextView
+        android:id="@+id/player_is_virtual"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/text_margin"
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:text="BOT"/>
+
+</LinearLayout>

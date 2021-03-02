@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/brushDecrease"
+        android:title="Decrease"
+        android:icon="@drawable/decrease"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/brushIncrease"
+        android:title="Increase"
+        android:icon="@drawable/increase"
+        app:showAsAction="always" />
+    <item
+        android:title="Color"
+        android:id="@+id/colorPicker"
+        android:icon="@drawable/palette"
+        app:showAsAction="always">
+        <menu >
+            <item
+                android:id="@+id/color_black"
+                android:icon="@drawable/color_black"
+                android:title="Black" />
+            <item
+                android:id="@+id/color_blue"
+                android:icon="@drawable/color_blue"
+                android:title="Blue" />
+            <item
+                android:id="@+id/color_red"
+                android:icon="@drawable/color_red"
+                android:title="Red" />
+            <item
+                android:id="@+id/color_green"
+                android:icon="@drawable/color_green"
+                android:title="Green" />
+        </menu>
+    </item>
+
+    <item
+        android:id="@+id/square_brush"
+        android:icon="@drawable/square"
+        android:title="Square"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/circle_brush"
+        android:icon="@drawable/circle"
+        android:title="Circle"
+        app:showAsAction="always" />
+    <item
+        android:title="Pen"
+        android:id="@+id/imgPen"
+        android:icon="@drawable/pen"
+        app:showAsAction="always"/>
+    <item
+        android:title="Eraser"
+        android:id="@+id/imgErase"
+        android:icon="@drawable/eraser2"
+        app:showAsAction="always"/>
+</menu>

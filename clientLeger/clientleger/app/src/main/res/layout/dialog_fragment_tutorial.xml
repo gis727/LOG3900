@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="600dp"
+    android:layout_height="800dp"
+    android:background="@drawable/tutorial_background"
+    android:padding="0dp"
+    android:minWidth="600dp"
+    android:minHeight="800dp"
+    android:animateLayoutChanges="true"
+    tools:context=".tutorial.TutorialDialogFragment">
+
+    <TextView
+        android:id="@+id/tutorial_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/roboto_black"
+        android:text="Tutorial"
+        android:textColor="@color/colorWhite"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/tutorial_sections"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/tutorial_sections_background"
+        android:elevation="4dp"
+        android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tutorial_title">
+
+        <TextView
+            android:id="@+id/tutorial_complete_overview"
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:foreground="?attr/selectableItemBackground"
+            android:paddingStart="?android:listPreferredItemPaddingStart"
+            android:paddingTop="8dp"
+            android:paddingEnd="?android:listPreferredItemPaddingEnd"
+            android:paddingBottom="8dp"
+            android:text="Complete Overview"
+            android:textColor="@color/primaryText"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tutorial_party_creation"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tutorial_party_creation"
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:foreground="?attr/selectableItemBackground"
+            android:paddingStart="?android:listPreferredItemPaddingStart"
+            android:paddingTop="8dp"
+            android:paddingEnd="?android:listPreferredItemPaddingEnd"
+            android:paddingBottom="8dp"
+            android:text="Party Creation"
+            android:textColor="@color/primaryText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tutorial_complete_overview" />
+
+        <TextView
+            android:id="@+id/tutorial_free_for_all"
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:foreground="?attr/selectableItemBackground"
+            android:paddingStart="?android:listPreferredItemPaddingStart"
+            android:paddingTop="8dp"
+            android:paddingEnd="?android:listPreferredItemPaddingEnd"
+            android:paddingBottom="8dp"
+            android:text="Free-for-all"
+            android:textColor="@color/primaryText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tutorial_party_creation" />
+
+        <TextView
+            android:id="@+id/tutorial_solo"
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:foreground="?attr/selectableItemBackground"
+            android:paddingStart="?android:listPreferredItemPaddingStart"
+            android:paddingTop="8dp"
+            android:paddingEnd="?android:listPreferredItemPaddingEnd"
+            android:paddingBottom="8dp"
+            android:text="Solo Sprint"
+            android:textColor="@color/primaryText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tutorial_free_for_all" />
+
+        <TextView
+            android:id="@+id/tutorial_coop"
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:foreground="?attr/selectableItemBackground"
+            android:paddingStart="?android:listPreferredItemPaddingStart"
+            android:paddingTop="8dp"
+            android:paddingEnd="?android:listPreferredItemPaddingEnd"
+            android:paddingBottom="8dp"
+            android:text="Sprint Coop"
+            android:textColor="@color/primaryText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tutorial_solo" />
+
+        <TextView
+            android:id="@+id/tutorial_commands"
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:foreground="?attr/selectableItemBackground"
+            android:paddingStart="?android:listPreferredItemPaddingStart"
+            android:paddingTop="8dp"
+            android:paddingEnd="?android:listPreferredItemPaddingEnd"
+            android:paddingBottom="8dp"
+            android:text="Chat Commands"
+            android:textColor="@color/primaryText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tutorial_coop" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--    <include-->
+    <!--        android:id="@+id/tutorial_page_container"-->
+    <!--        layout="@layout/tutorial_page_container"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="0dp"-->
+    <!--        android:layout_marginTop="16dp"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/tutorial_title"-->
+    <!--        app:layout_constraintVertical_bias="0.0" />-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/tutorial_page_container"
+        android:layout_width="0dp"
+        android:layout_height="576dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/tutorial_sections_background"
+        android:elevation="4dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tutorial_title"
+        app:layout_constraintVertical_bias="0.0"
+        tools:visibility="visible">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/tutorial_close_button"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:text="close"
+            app:cornerRadius="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/tutorial_action_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:text="next"
+            app:cornerRadius="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/tutorial_view_pager"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/tutorial_action_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tutorial_close_button" />
+
+        <LinearLayout
+            android:id="@+id/tutorial_page_indicators"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:orientation="horizontal"
+            android:padding="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tutorial_action_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tutorial_action_button" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

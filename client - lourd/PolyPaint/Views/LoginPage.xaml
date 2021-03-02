@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="PolyPaint.Views.LoginPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PolyPaint.Views"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d">
+    <materialDesign:ColorZone Mode="Light" Height="700">
+        <StackPanel Margin="0,120,0,0">
+            <Image Width="130" Height="130" Margin = "0, 0, 0, 20" Source = "..\Resources\logo.png"/>
+            <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" x:Name="Nickname" Margin="90, 20, 90, 0" materialDesign:HintAssist.Hint="Username" TextChanged="Credentials_Changed"/>
+            <PasswordBox Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" materialDesign:HintAssist.Hint="Password" x:Name="Password" Margin="90, 20, 90, 20" PasswordChanged="Credentials_Changed" KeyDown="Password_KeyDown"/>
+            <TextBlock x:Name="ErrorText" Visibility="Hidden" Foreground="Red" FontSize="10" TextAlignment="Center" Margin="30"/>
+            <Button x:Name="LoginButton" Foreground="White" Click="Login_Button_Click" IsEnabled="False" Style="{StaticResource MaterialDesignRaisedAccentButton}"  Height="35"  Width="100">
+                Log in
+            </Button>
+            <TextBlock Height="20" Margin="130, 5, 50, 50" >  
+                    <Hyperlink Click="Sign_Up_Click" FontSize="14" FontStyle="Normal">Sign up</Hyperlink>
+            </TextBlock>
+
+            <ProgressBar Style="{StaticResource MaterialDesignCircularProgressBar}"
+                            Value="0" IsIndeterminate="True" Margin="10 0 0 0"
+                            Name="CreationProgress" Visibility="Collapsed"/>
+        </StackPanel>
+    </materialDesign:ColorZone>
+</UserControl>

@@ -1,0 +1,144 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="popupMenuStyle">@style/Widget.MaterialComponents.PopupMenu</item>
+        <item name="android:actionButtonStyle">@style/ActionButton</item>
+    </style>
+
+
+    <style name="ToolbarTheme" parent="AppTheme">
+        <item name="android:textColorPrimary">@color/colorWhite</item>
+        <item name="android:textColorSecondary">@color/colorWhite</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:titleTextColor">@color/colorWhite</item>
+    </style>
+
+    <style name="Widget.App.Button.TextButton.Icon.IconOnly" parent="Widget.MaterialComponents.Button.TextButton.Icon">
+        <item name="iconPadding">0dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:insetLeft">0dp</item>
+        <item name="android:insetRight">0dp</item>
+        <item name="android:paddingLeft">12dp</item>
+        <item name="android:paddingRight">12dp</item>
+        <item name="android:minWidth">48dp</item>
+        <item name="android:minHeight">48dp</item>
+    </style>
+
+    <style name="main_container_tabs" parent="Widget.MaterialComponents.TabLayout">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="TextAppearance.MyApp.ProfileLabel" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="TextAppearance.ProfileStatistics" parent="TextAppearance.MaterialComponents.Headline4">
+        <item name="android:textSize">24dp</item>
+    </style>
+
+    <style name="TextAppearance.MatchHistoryAttributes" parent="TextAppearance.MaterialComponents.Headline4">
+        <item name="android:textSize">18dp</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.PlayedMatchAttributes" parent="TextAppearance.MaterialComponents.Headline4">
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">@color/primaryText</item>
+    </style>
+
+    <style name="TextAppearance.MainToolBarTitle" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textSize">32sp</item>
+        <item name="fontFamily">@font/roboto_black</item>
+        <item name="android:titleTextColor">@color/colorWhite</item>
+    </style>
+
+    <style name="TextAppearance.SocialToolBarTitle" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textSize">24sp</item>
+        <item name="android:titleTextColor">@color/colorWhite</item>
+    </style>
+
+    <style name="TextAppearance.HeaderName" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TextAppearance.ChannelName" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textColor">@color/primaryText</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="Widget.MyApp.TextInputLayout.FilledBox.ExposedDropdownMenu" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu">
+        <item name="drawableEndCompat">@drawable/ic_arrow_drop_down_white_24dp</item>
+    </style>
+
+    <style name="TextAppearance.MessageContent" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="android:textColor">@color/primaryText</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TextAppearance.MessageAuthor" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="android:textColor">@color/primaryText</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+
+    <style name="TextAppearance.MessageTimestamp" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="android:textColor">@color/blueGrey</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="ActionButton" parent="Widget.AppCompat.Light.ActionButton">
+        <item name="android:drawablePadding">8dp</item>
+    </style>
+
+    <style name="TextAppearance.PartyTitle" parent="TextAppearance.MaterialComponents.Headline3">
+        <item name="android:textColor">@color/primaryText</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.PartyMode" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">18dp</item>
+    </style>
+
+    <style name="TextAppearance.LobbyMode" parent="TextAppearance.MaterialComponents.Headline3">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">32sp</item>
+    </style>
+
+    <style name="TextAppearance.LobbyDifficulty" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textColor">@color/primaryText</item>
+        <item name="android:textSize">32dp</item>
+    </style>
+
+    <style name="Widget.App.ReadyPartyButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:textSize">40dp</item>
+        <item name="android:textColor">@color/colorSecondary</item>
+        <item name="background">@color/colorWhite</item>
+        <item name="backgroundTint">@color/colorWhite</item>
+    </style>
+
+    <style name="Widget.App.LeavePartyButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textSize">40dp</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="background">@color/colorSecondary</item>
+        <item name="backgroundTint">@color/colorSecondary</item>
+    </style>
+
+    <style name="Widget.App.Button.OutlinedButton.IconOnly" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="iconPadding">0dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:paddingLeft">12dp</item>
+        <item name="android:paddingRight">12dp</item>
+        <item name="android:minWidth">48dp</item>
+        <item name="android:minHeight">48dp</item>
+    </style>
+</resources>

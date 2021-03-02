@@ -1,0 +1,57 @@
+﻿<UserControl x:Class="PolyPaint.Views.ChannelsListUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PolyPaint.Views"
+             xmlns:converters="clr-namespace:FMUD.Converters"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" MaxWidth="300"
+             x:Name="parent">
+    <UserControl.Resources>
+        <converters:IconConverter x:Key="iconConverter" />
+        <converters:CurrentChannelBoldConverter x:Key="currentChannelBoldConverter" />
+        
+    </UserControl.Resources>
+    <DockPanel>
+        <materialDesign:ColorZone VerticalAlignment="Stretch" materialDesign:ShadowAssist.ShadowDepth="Depth4"
+                                      Mode="PrimaryLight" Padding="10">
+            <StackPanel>
+                <DockPanel>
+                    <Button Margin="10" Padding="0" x:Name="JoinButton" DockPanel.Dock="Right" Width="25" Height="25" Click="Create_Add_Channel_Click" IsEnabled="False" Style="{DynamicResource MaterialDesignToolButton}">
+                        <materialDesign:PackIcon Kind="Add" Width="20" Height="20"/>
+                    </Button>
+
+                    <TextBox  x:Name ="CurrentChannelInput" TextChanged="CurrentChannelInput_TextChanged" Text="{Binding ChannelInput}" materialDesign:HintAssist.Hint="Join or create channel..." materialDesign:HintAssist.FloatingScale="2" 
+                    materialDesign:HintAssist.FloatingOffset="1,-42" FontSize="18" Margin="10, 10, 10, 10"></TextBox>
+                </DockPanel>
+                <ListBox HorizontalContentAlignment="Stretch" Height="1000"  x:Name="channelsList" ItemsSource="{Binding AllChannels, Mode=TwoWay}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  MouseLeftButtonDown="View_Channel_Click">
+                                <Button ToolTip="leave channel" Padding="0" DockPanel.Dock="Right" Height="15" Width="15" Style="{DynamicResource MaterialDesignToolButton}" Visibility="{Binding joined, Converter={StaticResource iconConverter}}" Click="Leave_Channel_Click" HorizontalAlignment="Left">
+                                    <StackPanel>
+                                        <materialDesign:PackIcon Name="LeaveJoinIcon" Kind="Minus"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button ToolTip="delete channel" Padding="0, 0, 0, 0" Margin="5" DockPanel.Dock="Right" Height="15" Width="15" Style="{DynamicResource MaterialDesignToolButton}" Visibility="{Binding owner, Converter={StaticResource iconConverter}}" Click="Delete_Channel_Click" HorizontalAlignment="Left">
+                                    <StackPanel>
+                                        <materialDesign:PackIcon Name="DeleteIcon" Kind="Close" />
+                                    </StackPanel>
+                                </Button>
+                                <TextBlock VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Padding="3" TextWrapping="Wrap" x:Name="ChannelText" FontSize="20" Text="{Binding id, Mode=TwoWay}">
+                                    <TextBlock.FontWeight>
+                                        <MultiBinding Converter="{StaticResource currentChannelBoldConverter}">
+                                            <Binding Path="id"/>
+                                            <Binding ElementName="parent" Path="DataContext.CurrentChannelId"/>
+                                        </MultiBinding>
+                                    </TextBlock.FontWeight>
+                                </TextBlock>
+                            </DockPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
+        </materialDesign:ColorZone>
+    </DockPanel>
+</UserControl>

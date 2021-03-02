@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Server-tester</title>
+    </head>
+    <body>
+
+        <p>
+            <input type="button" value="CREATE" id="creator" />
+            <input type="text" placeholder="nickname" id="creatorNickname"/>
+            <input type="text" placeholder="firstname" id="firstname"/>
+            <input type="text" placeholder="lastname" id="lastname"/>
+            <input type="text" placeholder="password" id="password"/>
+        </p>
+
+        <p>
+            <input type="button" value="LOGIN" id="logger"/>
+            <input type="text" placeholder="nickname" id="nickname"/>
+            <input type="text" placeholder="password" id="logPassword"/>
+            <input type="button" value="SEE DATA" id="accountViewer"/>
+        </p>
+
+        <p>
+            <input type="button" value="GET HISTORY" id="history_fetcher"/>
+            <input type="text" id="roomHistoryName"/>
+        </p>
+
+        <p>
+            <input type="button" value="GET ALL CHANNELS" id="channels_fetcher"/>
+        </p>
+
+        <p>
+            <input type="button" value="CREATE ROOM" id="roomCreator"/>
+            <input type="text" id="newRoomId"/>
+            <input type="button" value="DELETE ROOM" id="roomKiller"/>
+        </p>
+
+        <p>
+            <input type="button" value="JOIN ROOM" id="roomAccessor"/>
+            <input type="text" id="joinRoomId"/>
+            <input type="button" value="LEAVE ROOM" id="roomLeaver"/>
+        </p>
+
+        <p>
+            <input type="button" value="SEND" id="sender"/>
+            <input type="text" id="msg" placeholder="msg" /><input type="text" id="msgRoomId" placeholder="room" />
+        </p>
+
+        <p>
+            <input type="button" value="CREATE GAME" id="gameCreator"/>
+            <input type="text" id="gameId"/>
+            <input type="button" value="REMOVE GAME" id="gameDestroyer"/>
+        </p>
+
+        <p>
+            <input type="button" value="MODIFY ACCOUNT" id="accountModifier"/>
+            <input type="text" placeholder="new nickname" id="newNickname"/>
+            <input type="text" placeholder="new firstname" id="newFirstname"/>
+            <input type="text" placeholder="new lastname" id="newLastname"/>
+            <input type="text" placeholder="new password" id="newPassword"/>
+        </p>
+
+        <p>
+            <input type="button" value="CREATE PARTY" id="partyCreator"/>
+            <input type="button" value="JOIN PARTY" id="partyAccessor"/>
+            <input type="text" id="newPartyName"/>
+            <input type="button" value="LEAVE PARTY" id="partyPooper"/>
+            <input type="button" value="GET ALL PARTIES" id="partiesFetcher"/>
+            <input type="button" value="READY TO PLAY" id="partyLauncher"/>
+        </p>
+
+        <p>
+            <input type="button" value="ANSWER" id="answerProposer"/>
+            <input type="text" id="answer"/>
+        </p>
+
+        <p>
+            <input type="button" value="SEND STROKES" id="strokeSender"/>
+        </p>
+
+        <textarea rows="15" cols="35" readonly id="chat"></textarea>
+
+        <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+        <script>
+            let socket = io.connect("ws://localhost:5025"); // pi3-2020.herokuapp.com
+            // LISTENERS
+            socket.on("create-account", function(message) {
+                console.log("create-account: ",message)
+            });
+            socket.on("view-account", function(message) {
+                console.log("view-account => ",message);
+            });
+            socket.on("modify-account", function(message) {
+                console.log("modify-account => ",message);
+            });
+            socket.on("login", function(message) {
+                console.log("login: ",message)
+            });
+            socket.on("send-message", function(message) {
+                $("#chat").append(message);
+            });
+            socket.on("chat-room-history", function(message) {
+                console.log(message);
+            });
+            socket.on("create-chat-room", function(message) {
+                console.log("create-chat-room => ",message);
+            });
+            socket.on("new-chat-room", function(message) {
+                console.log("new-chat-room => ",message);
+            });
+            socket.on("delete-chat-room", function(message) {
+                console.log("delete-chat-room => ",message);
+            });
+            socket.on("enter-chat-room", function(message) {
+                console.log("enter-chat-room => ",message);
+            });
+            socket.on("leave-chat-room", function(message) {
+                console.log("leave-chat-room => ",message);
+            });
+            socket.on("create-game", function(message) {
+                console.log("create-game => ",message);
+            });
+            socket.on("delete-game", function(message) {
+                console.log("delete-game => ",message);
+            });
+            socket.on("new-user-connected", function(message) {
+                console.log("new-user-connected => ",message);
+            });
+            socket.on("user-disconnected", function(message) {
+                console.log("user-disconnected => ",message);
+            });
+            socket.on("get-all-rooms", function(message) {
+                console.log("get-all-rooms => ",message);
+            });
+            socket.on("get-all-parties", function(message) {
+                console.log("get-all-parties => ",message);
+            });
+            socket.on("create-party", function(message) {
+                console.log("create-party => ",message);
+            });
+            socket.on("join-party", function(message) {
+                console.log("join-party => ",message);
+            });
+            socket.on("leave-party", function(message) {
+                console.log("leave-party => ",message);
+            });
+            socket.on("player-joined", function(message) {
+                console.log("player-joined => ",message);
+            });
+            socket.on("player-left", function(message) {
+                console.log("player-left => ",message);
+            });
+            socket.on("party-removed", function(message) {
+                console.log("party-removed => ",message);
+            });
+            socket.on("new-party", function(message) {
+                console.log("new-party => ",message);
+            });
+            socket.on("ready-to-play", function(message) {
+                console.log("ready-to-play => ",message);
+            });
+            socket.on("start-game", function(message) {
+                console.log("start-game => ",message);
+            });
+            socket.on("update-stats", function(message) {
+                console.log("update-stats => ",message);
+            });
+            socket.on("end-game", function(message) {
+                console.log("end-game => ",message);
+            });
+            socket.on("end-party", function(message) {
+                console.log("end-party => ",message);
+            });
+            socket.on("answer", function(message) {
+                console.log("answer => ",message);
+            });
+
+
+            // BUTTONS
+            $("#creator").click(function () {
+                socket.emit("create-account", JSON.stringify({'name': $("#firstname").val(), 'surname': $("#lastname").val(), 'password': $("#password").val(), 'nickname': $("#creatorNickname").val(), 'avatar': `data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKAAAACgCAYAAACLz2ctAAAABmJLR0QA/wD/AP+gvaeTAAAgAElEQVR4nO2deZRcV33nP/ftr7burl7V2peWLMnGlhcBMsb2JBhssXpiEiAsWQBbJjlnAoRJMjNH50CYk+0kwwSSsATbBMgYMgM22CEYLAM2tmws21qsxbLW3tfqru1Vvffu/PG6W713V3V1V7Vcn3N01F1d777fe+/7fvd37/3de6FKlSpVqlSpUqXKaw1RbgNWIg/uuyWSkaH/AdwGIAU/CpH+7Hu/dCBZZtNWHFUBFsg379lb5woOgtwy5U+nfMPY/Tt/972hshi2QlHKbcBKw0X+JcgtQgg0XUXTVYQQAG1q3vmLctu30qgKsFAU7gTQdAWhCIQiUHUVACnFnWW1bQXymqiCC43ZvvaJd7aqfv5KgbJFItcLWA+0CIhLuApAN7VJx+QdFwABh5Gy34cuhDiPkGdVxCvkvSMf/PKPOkth3+XEZS/A+WK2DbVDyYs94d2+8G9BiptBXgeifr5yZxPg3Mh+JM9JxBNCUQ6sa0w+29Edjr6WY0pt/q+sbIKYjS1CCFQtiDg810dK2abknJfO94TrQEaQY++iACFQVYGiqSiqiqIqKKoAAamB1Jzni8QjSCnxPYn0PDzPx/d8PNcHST2Ctwp4K9LnfE84iZCDwNqZ7BuNKT++ZDenArjsBYjCncggZiNoLKDqKm7OBcRakKiaimaoqIaOqqmB2IpkLB4M0Cf9Tfo+bt7Dy7m4OQ/P9SJABGa2bzSmvKwFeFk3Qh7ff4uGJA6MP9wpPxJrjBGpj2BFbXRTW5T45kMoCrqpY0VtIvURYo2xCX+c0b6Gx/ffclk7icsyBnzwrruMdGPytwTiz4CtMHvMVtNcU1DZie4Ey1kecBb4O9sMf/m9f/udTEGFrwAuKwE+uO+WSBb74xLxSWDVxL+tYAGOIjuQ4m9skf7y5dQ6Vuf/SuWzf/9+5SM77btd9IdAvBuIarqGXWORz+YBxgP8MXzPB8CKWAWdy0k5y1peuDaE7/lIX0YRvDWP9vH33LA1cc3eDxw6cOCALOhkFciKjwHvv/vtuzf2HDwopPgSiHrd0AjHw4TjYTRDn7+ACkczdSLxCOF4BM3QEEEX0T9u6jn49AOfuOP6ctu3WFZsFfzNe/bWeULul3AvoCqqih210KZUZctdZS51eW7OJTOSwXd9AInkX3RP/aP3f/nhvoJOXCGsSA/4wL1vu8NFnpTwh0KgWhGTaH1kmvguRzRDIxKPYkUshEAg+GBO8459fd8dbyu3bcWwop7YP33sOt1Sm/9cSj6FQIx1aSxl10klIgSYYRPD0smMZMg7bqOAR+6/9/a/XNeY+W+37j+wkGGZimDFeMB/3nfbWkttfhzBpxFCWFGLUG3oNSe+iQhVIVQbxo7ZgTeU4jPne0NPPvCJd2wst20LZUUI8P57br9dRXsRwY2qqhCJhzFDZrnNqhgM2yASj6JoKkh2S8997oFP7H1rue1aCBUvwPvv2fvbCPEQUKdbOpH6CKp2WfQelRRFU4jGw+i2DkLEpS9/+MC+vb9Xbrvmo6IFeP+9d3waIR8ANDtqEaoJTR5HqzIZIQjFQthRC0CVyK88sO/2T5bbrLmoyKcpQTxw7+3/Eyk+A2DHbAzbKKqsQro5XLsJp/Ea3NhGvHALrlGDL0w8VKQEH5BS4PsSJHh+0A+sKsFtVFSBAgghEUKi4qP6WZRcAi3VhT50GrP3edTcYFH2FUIumyOTyAISAV94tWn3f9m/f79fVGFLSMW1giWIB/bt/SpS/i5CEK4NoRmlN9O34uR3vIvetdeR02vJuSquN2FgQQLOxF9m+jlg/Dhv6t8UIBT8C6+C8C5Y/RtoGpiqh54bQJ47iH78YSBdoisLMCwDoSikB9NI5B9u6DkYlvBRMdMFlJGK84D37dv71wL5SSEE4brwlPSmwpnoYbIt15Pb9m7ykTVkXWXao1AEmKaCaSgYRvD/jRt0TE1gqGCogic7fBRVIMQlz+f5MvCQnuTGVoWcJ8l54LiSJ8/mcXI+uZxP1gn+96ecVwgwdR8jcQbr6HfQB44t2gOO4eU9UoNJpAQkf/Xhf3jkjxdVYImpKAHet+/2PxaIvxACwnWRRYsPoD9l4+z6PfL1O8l5lz4XAtbU67iKQjikEg6pWOb0kPim5sm//7x77vMt5PtZxyeV9kilPVTp096XDwQyiqn5aJ2HsA99jbraxTssN++SGkyDlAjkpz70pUf/ZtGFloiKEeB9+27/gEB8A4QI1YXQF1ntZqJbGdz2IdJaA3JCrHbVepPNzTqrogqWWhpBLfb7WQ86R3xOd+c5fM4Zjy0VRWA7ndSf+Bpm+uLcBc2Dm3NJDaVAIgX87oe+9Mh9iyqwRFSEAL++7463KfAwoIVioaAroUhy1ip6t99NRm8ar2HDIZWmeoOGuM7NqyZfciUIcCIHOiT9g3l6+3Mk04HLForAzl6k+dgX0SY0YAoln82TTqQBXInc+5EvPfofRRdWIsreofbAx96xTlHkj4GwHbUwQsW1dkGhe+tH6d34W+SVMAC1MY1N62zWtlqEQ8H83fWRyUedn3uKx7J//0JaBC9Mg0EsqpF3JdmsT16NMdL6a3halNDQkbkLnQVVUxFCwc25ipDsfefuTd/+/rOnh4sqrESUtR/w8f23aFL1viVHO5mNIkc3suE1nNv9twzX7kL6ELZVtreF2bY5TDRScQ39BROLaFyxOcz2LWHCIRXPh8Gmmzl3/V/hGvGiyjTDxnhntYr24D997Lqy5qyVVYDnekJ/juBGVVOwo3ZRZQw130r7lX9GDgNdE6xfbXHltgixFSy8qcSiGju3Rli72kJXIadEOL/rcyTj1xZVXihqo6oKwBsstWV/KW0tlLIJ8Ov77nibgE8hBHZNCKEUHo72rnsvfRveiy+hsUbjIzfFaGkyKySyLS1CQGuTye/cHKO5VsOTgq62jzLYentRhdm1odGf5X+9b9/tt5XW2oVTFgHef+976hXJNwDFjlpFje12bfwQQ6tuRUrYvtbkA68PU/MayE+IGYL37Q6zfY2JlNC/9p30rXlnweWomjpW6yhIvvHNe/bWldzYBVAWAQqyn0fQoJt6UUNsfWvvZKTpjSDhmo0Wt++w0Cp6VLu0aArcsdPi2k0WUsLQ6tsZbHlLweUYIQPN0BFCNLlCfm4JTJ2XZX9s992z9zopxe8DWNHCJvAAJOPXM9T6FpAQr9X5tW0mRdTeKx4h4NatJvFaHSlhYP2dpGuuKLic0VxCgLvvv/vtu0tt53wsqwD379+vCCG/CChmxEJRCzt93mqiu+13kRIiYZXNG0KXY7i3YASwZUOIaFjDl9B1xSdwtci8x01EUQVmyAJQhOL//f79+5dVE8t6sk3dBz8GvF7VlKISSjt2fgpfCnRdsHVj+DXp+aYiBGzZaKPrAk+qdOwsfKjXCJsoqoKEGzb1PPs7S2DmrCybAB/cd0vER/45gBW1C07r61t7Jzk1ihDQtiGErlfVN4ahK2zdGEYIcMxGhlp+raDjhQA7FoRDEvn5Bz51W3gp7JyJZRNgFvvjQoi4bmgFp1f5Wpjh1l8HoKXJXNGdy0tFJKzS3BjUKgMb7kSKwmoYzdDHnkuTTGu/X3oLZ2ZZBPiFP7jdlPBHAEak8Kq3c+vdeFKgaYLVza+BvpYiWdNiomsCz1fo3vLhgo83w+P39lMP3nVXsWOiBbEsAqzxxEdAtGq6hqYX5r1cLUo2GqzduG61hfoangU3H6oqWNsaVKXp+C6kUqgX1MZS4NZkG9MfLL2F01lyAT54110q8EkIgt1C6dv0fnwJtqXQULcsL+WKpiFuYJsKnoTedf+54OPHvKCU8k9Gn92SUvJg6j3//VGp6Zo0DdU1Dc15yhSp+nxHc02unZBzDPx50kMmoZKJXw0+tDSa1flIC0AIaG4yOXshQ7plD5z9VmEF2LUM1e4hYbZuHtRXX/y9N/5BxMm5ppPztHzOFd/73O0lfQolF6Dn+XheTjhZdEDvhcirRIBtqOp2VtfrrDUH2JD4GabTP2dZA2vuwPUFmipoiK/8hYaWi8a4zoWOLHlPJdF8MzXdT8z5fcds5GzNTZzPxukYyOFlxuYuDbcsta0lF+C9H/31h9OZ3DsGBpP0D6ToGxhhYDDJQH8S1/M53+NwnjBPq3vZ1Kyxwz9E/eChGctKrXoTAA31Bkq102/BKIqgsd6gq8dhpPU/zSrA/tpdHFOu5dXuPN6wD2QB0DSVeDxMvC5CQzxK/ejPIdt4+KHPl9bWkgswGjXusW3j5vp4JNa2+dLnUkp6+oY59nI7L5/sJJ12ONWR4xQ72dB8Lbvks9QlXrr0fcUkp8RAUvV+RVBfq9PV45AzmwhC/UszMgdqruGQuJ5z3VnGpv6FwyZXbG1lxxWtNDXExjbfmciwpnFPqe0suQD3NIj2JzrlnwrB30/8XAhBc2MNzY013Pym7Zw63cXB516luzfB2W6Hc+Jqdq7exTVD38fIDzHY+hZ8GXSyhu2yJ26vOCJhFUNXyOV9Eo03UtP7c/JGnF/F3snLHS5SBt6uuamG3ddvom1Ty5y1jJT86Z4G0V5qO5ekR/fNLfzDzy46+4Ru7pjp74oi2Na2im1tqzh7rpef//Ik3T0Jjlz0eNW+k1vqT+K17AEgXlvtdC6WulqN7t4cqTW3kvbhiYEtpNuDFWNbmmp40xu3sWF9w/wFebmjb241/mEpbFySbhghhN//71/52aS5hrOwYX0jv/2be7j9LVcTjVikMzke7dxAfjTlvDZWrX6LZeze5e1V/HvnetLZPJGIxR23Xc0HfnPPwsQnJQP/8U8HhBBLsqrCkrmXkecf2WhtvIrIlTfP+10hBDu3r2ZrWwtPP/MKLx5rJ+9JhAiqkiqXGMot/LvRkIoQkHNB0zR2bGvl5jddgVHAUGjqyBMkDv77+iJMXRBLIsDH99+ine8RewYf+zrh7XsQ6sK8mK6p3HTjNhqbm0mMgG2r8458zDft8XLjcAGzMlVNYJkKmazP295yA9u2FJb0LL08Az+5DwQ3P77/Fm0pFr5ckir4fG/kBiDqp/txjvyo4ONVNRjxqHq/xRMJBz5G1QsfhXKO/Ag/PQAQPdtj7SqtZQFLNBTn3QqgGzqZ57+PzBUy+gG53OgWBdXW76IZu4eOU9gSHzKXJnPoITQjOF4gbi25cSyVAKW4GUA1NGQuRebFRwo6PJ8PbpZtvYYmeiwRth3cQ9crrA2RefGHSCc5njqnLJEAl6gRIq+DSxs5O4cfxb7qbQgruoBDIR9sQYBtld4DVlrMuNT22GZwD3O5hXtAmR3BOfwoANrYZtxQ3CTkeSi5i7n/7revBlGPECijvekynyW7wFgwmXLxJWhqkP9XZXHoukDVgkU109mFecHskR8h80FHtRDK2KhI0wN339ZUavtKLkChySshyE2bOGPIOfIf4xc1F6lMsCCPOcNSaVWKwzKCe5lOe/N8E3Adskd/fOl3wfjkMV9Vriq1baV/yl6w87cyZbK57yRxjj8+7+F5N6gqDKMqwFKhj9YkjjO/ALPHfoLMjkz6TBmbdO2rm2c4ZFGU/ClLWA8TjJ5A9sVHkP7cN2FcgNXqt2SMvcz5efQnfY/sS49O+3zMAyqK3FBq20rvZgTrABRlegPCT/WTP3NwzsPdUQHqetUDlgpj1BmMNe5mI3/mIH5qeo7mmAClZEOpbVuKp7wKmHUHI+fE3MmR/uj4sV71gCVDG53CKqctoj6Z2Z7NhAUESp6guhQCjAMz5ZMB4F48jJ+cfWNHOfqSVicflY7xxdTn0J+fGiB/ceaFLxVlVCaS4hYlnIMl6AeUcRCzLpEmpcQ58XPs694z49/HVpCfS4AjI1kOH2vn3MU+hgZTZLI5fOmPr3qvqAqGplJbG2H92ga2trXQ3LiAPsgZKLSfrlT9ej19I5w42cPZCz0khpLkXR/PGw3iBChCwbYMamvDrF/byM4drdTMstbOWHvQn0OBzvEDl97+qYjx/+uLu5rZKbkABSIsCfqPZsM5cQDr2nfP6CWlHFtQfPLnWcflmefOcPjoebJZZ9pxE/E9n6zn09U9SFf3IM88dwrLMtl1zUZ2X7sBvUKX0sp7Ps/+6iwvvPAq6ewcaS8SfOmTSmdJpbO0d/Tz1DPHsWyTq7av5fU3bMKasPHNWDjkz5oeJ8md/Pmsp5vwnEq+YkLJBSjBgLl31PJHevG6T6G1bJ1+/OhLOJadm8m4PHbgGCdPtSNHXZwATEMjZGmEDBVdV9AUBSECAXu+JO/5ODmfTM4llXXJZh1++fRxnjl4gj1v2M4brt9Q0uteLM/86hxP/vJYsAsTwfWHTQ3b1IJ9S1QVRQnEIGUwtJb3fDKOR9rJk3U8shmHZ59/hecOnWbrllZ+/Zad2LaGNnovfX+WsKjrFN7wHK770sMs+aoASzEUNyrAuWO43LnnZxTgWC2hqYKnnz3LU0+/PP7mGrpCXcQkGtLHR1mmIkQwi05TFWwDajGQEpLZPP3DWXJ5n188dYwTJ9t5/11vQC/BXiSLwXV9vvWdp+npHQLA0FXqYyYRS5/1JRYCdE1B1xRCpkY9Jr6UjKTzDI04OK7PiVPtnDzdwY1v2MauqzYAl2qXqeTP/mpOGyeYUXIBLkVdNJY+MSf5c8/P+LkvJb7v863v/pJf/PIYvpQYmsrqhjAbmqLUhI1ZxTcbQkDU1tnQFKW5LoQiBL19Cb56/wEcp3x7Ozs5ly/fd4Ce3iEURdBSZ7OhKULUnl18s6EIQU3YYH1zlDUNYUxDRfqSXzx1nG995yl83581QT13fuZnMc4lW0r+tpYtGPIG2/Ez03cIcDI5XnzxMP39CUAQj5msbw4TtrTFr/0soCass745gq4qpNIOD3z7yVk9w1Li+5JvfPtJ0uksuqawrilCLGyU5BpDlsbaxgjxWLBedv/AMC+88BJObnpc6WeH8QY7FnnS4injjB+J23UCY+MNkz49+Ozz5HL58e8MDDsMDDsoQqBrCpqmYKgKlqli6WpRDQpdU1jTGOZCT5LEcIofHzjGbbfuLME1LZzHnniZoUQKVRGsaQgX3TDKez7ZnEc255JzJa7rk3e9afvRpVIpDj7zK95w7eT1yL2OE5Rz/8KyTjlze05PE+CY+PRgwcSgUSElvpQ4eQ8n75ECSAbf11RB2NSJhDRC5sKrLl1TaI6HaO9LcfjIOXZft4naWHFbRRRKYiTLS4fPAtASDxUkPikl6azHSDZPKpvHm6VrRRA0ZIQQCAKh5vLTw4187+kirqB0lFWAfqJzhk8FINnYEp1UHbm+xHU9QrrLrvVDHO/QON6hkclBIp0jkc6hKBCxDeJRA2MBK++HLY2orTOSyfPjnxzlrvdcX7Jrm4vHfnoUgIitB6HFAnBcn6ERh5F0flJ3iqVLrmh12b46zwsXakk5BrqmjHc+j3GyPQESpC8nbYnhDZV8qm9BlFWA3tD02EPTVFzXxZdyUmNDUwSaoXHHNcPcfEUmON6Hw6/m+Mevv8yAtQ3HbmU4lWM4nSNiadRFLWxjbiHWxUxGMnnOX+zF9Xy0AtetLhTPlZw93wNAPDp/ozKbc+kfdkg57nhNaWY6qcsc5+Mf3s7VbcZ4n2nriQwPH5ruxccEq6rKtP1Y/KGuRVzN4imrAKem/QAYhoHruuQ9H3OGhIa25sz4z6oChx/7KXb7CVZzgLzZwHB8NyN1u0hmIJlJErJ0mmutWas5S1cxdRUn7/Hy8U6u2rm6dBc4A8dOdSKlxNQVrDlejpzr0zuUIZUNqk3FzxEZPERs4CCGEwxlHn6snWu33TF+zNaWzIxl5d1glMgwpwt+pmewnJS3Cnam37BQyCKdTpPL+5gz9NHVhSfHMSeOnBv/WXf6qO98hLrunzLUuIfhhj2ks3C2O099zCIeNZipmRm2dJy8x6nT3UsuwFOvBB2+4Vl3BJUMjOToH84iJSgyT6zvaWr7foHiTU7oPT7h2mH6vRkjlw9690P2DN4xN7Nol4vyjkn5eZiSHxiLBTuEp7L5mY5AyvlbGYqfJd79Uzae/nvetC2HlNCXyHKxN407tXkI2KP5cr39iUKvoGB6+4IOZ2uGl8vzJRd70/QlAvHt2Zpj87kvEu9+bJr4Aibfi9l6k1KjfZ2xWGzyH3wveAZlpOyDojKXnvR7Q0McISCZcceHpSYylJ784Np2rJ217Ct31vPpdyT5k3eNELUlacflQk8SZ0pmpjEqhky6gGUHiiSdCc5hTAkJHNfnfE+StOMSsSSfeVeSz7wzyY5tsyegXHHVukm/D6WnV2hSQjITiKy+YXJZfoHTZZeCsgvQS0wOgk3TIhaL4UtJYgZBnOyeXI3s/Y0bCc+w06YdMnn3+4JlQd7QlufvPpSgpVaSd30u9KTI5i5VV2OZN56/JMufTMIfTQqd2Nhx8h4Xe4KMl8aY5G9+O8GetuDa337XjYTC07NcwhGLd73vzZM+O9k1/T4kUjl8XxKLxaZVwX6i/FMEyy7AqV0xqiJYu2YNAAPDl7avH+Pg6SgTddLQVMOnP/t+dr1+K5ZtYlo6V1+/hU9/9gPEGy6lYNVHJG2tIcKWhi+Dqs7JBZ5QEcBoIsNSj4qMJ1SM1p451+NibwrPl4RMja2rQzTVXLrAppY6Pv3Z93PNDW1YtoFlG1yzu41PffYD1NZd2hXJl8G9mYjnS/qHg6p73do108bnp7785aDsa5/lu05ibL30JisK1MXrqK2tZWhoiJ7BDKvqQ+N/7x3R+cWpGt687VK8VlMb4UP3zL1t6dOno3QPG7TWG3T0p0hlXdr706xriqCpAoFAEnR4q8uwGLUQAs+TtPelA/FZGqvrQ/SOCJ5+JcaetkvDlLXxKB++9445SoOnTtXQPTy5YdM7lMXzJTW1NdTW1aFMcTde14mSXU+xlN0D5s88h3Qv5feNpWFtbduCoiqMZPIMJifn/z3yYh0nukIslNM9Fg8dCuIfIWBVfRjLUHE9n47+VFnGgpHQ3p8i7/pYhsrq+tC4h3roUJxTXQvfyPFUt80PXpi88NBQMugPVRSFti1bECIYNRo/vZcjd/a50lzLIii7AP3sMNkXfzD+u3CDKsO0TLZt3QoIehNZhlOX4kHPF3z9Z038/ESMucI2X8JTp6J89YkWXO/SzVcEtNaH0VSFbM6jb3juBNeloG8kSzbnoamC1gnig+D6vvazFp48FZs2pjsRX8IvTtbwtSea8Sbk+o2k8/QkMsE+cls2Y9ujYp4wLzt76OEZk0GWm7JXwQCZ5/4vuXSeyPV78Ud6IBzEgA0N9WzYuI6zZ87RNZTB8yV1o6MHni946FA9T5+OsnvzCNtastSFXQSSwZTOyS6LZ89E6RyaeW8RTRWsittc6EtN87DLwcBwDhCsGn0RpuL5gu/9qp5fvhJl96YkW1sy1IWD1mxwfTYHT0enVbuDSYfeRBYkrFu/nubmS4sZyJEevIxF8lc/xDv68JJe30KpCAGCZOSpf2Xg8W+gXPcH4wIEWLtmDYpQefXVM/QmsqQcj5Y6a/yh9Qwb/OBQPT+Yreg5sE2NurBZFgGCpC5izDtU2J0wePjQ/HOBXF/SM5gmmXERAtauW8e6dWsmfUcMnuP8X/0xuqUTqll4CLOUVIgAQYxNfk5PnzG3evUqTNPg1MlTpLN5zne7xGMWNWF93szr+aivMUlm8/POmS01uqbQUFOC7BsZJGP0JYIGh6aqtG1to6Fh+vwhJdMLXLrXlUDFCFAdvSnqDAKEoDqORqO8cuoVBgYH6RnKMJh0iEdNYiGj6F2UFCFoqLHo7E/P/+US0hCzFrXzky9hJJ1jYNghP7r0Wl28jrbNmzGtmZMctExwb9WpzeEyUjECVEYnoqujb+lMmKbBzit30Nvby7lzF8lk0nQPZuhNZInYOjVhHcvQCk4qjtoaMyWGLSWRUBGLr0vI5D2GU7lJaVmhUIi169bQ1Ng45+FjtUuhO9UvJZUjwNHMFzXdM+93GxsbaWxsoK9vgAsXL5IcSQZpWKkciiIImRphS8PSVQxdXYCnEaOzzZavO2YhL4mUklw+yHhOOS7prDspFzASCbN27ZrR6nb+EtV08HLPtmpFOagYAQpVgBCoqS6El0Oq8+2MKWhoqKehoZ50OkNvbx99fX2k02mSmfz4+CcCTF3F0FT00dlywT+BogRVcDm2AQsmX8nx/10PXN8fTan3ybk+jutNy5a3bZvGxgYaGhoIhxfekBBeDjXdHawZoFbO0seVI0AhUFUFz/VQh8/h1rUt+NhQyGb9+rWsX7+WdDrN8PAIwyPDDCeSZLPBkNvYsFv5kYDglfb5++CEAMsOEauJEIvGgvHcUHENF234DEgfVVMqatfRihEggKqreK6HnjhbkAAnEgqFCIVCtLQ0A+B6Lul0hpzjkM04OI5D1nHI5XNIz8f3fTw/+N91l0OkCpqmoigKqqKgqApCUTB0A8s0MU0T0zIwTZNQKISmleYRaUNnAFAL3DB8qakoa8bWFBy7WaVAUzVi0ShEF7Y2zFK3EG+6ac+Slj8bemJMgJXTAIEKGIqbiDb6do7drCqlQxsTYIk8aqmoKAGOe8Bk+ywZwFWKQXEzqCNBR5O6gNmCy0lFCXB8VMN3sRLlTxW6XLASxxHy0tJulURFCXAiZv/Rcptw2WD2Hyu3CbNSsQJUu16a/0tVFoTW9WK5TZiVihWgMnQeNTdUbjNWPGpuCJG4WG4zZqViBQhgD75cbhNWPPZAZYcyldUmn4LZeZBk8xuX9Zx//YXCNlYslJtuunFJy5+K0Tn3thjlpqI9oNbxfLU7ZhEoXga984VymzEnFStATdeQXh67r3ID6ErH7juE9PKoRuVWdJUrwNFly8zOp8tsycrF6gjunWEWkXu4TFSsAHUzSMfSOl9Y1mp4584dGMZ8qWCFo+s627dvK3m5s6F4GVxAW5kAAAeySURBVLTOoPbQrKoAC0ZRRze8dh3svnkW0S4h8Xgd1123i1UtpduVqqGhgeuu20VDQ0PJypyPUM9zSC+PpmtlyXdcKBUrQADDCjyRdeaxZT2vpmlsadu8aG9ojHq97du3oevL64WsM8Gev/qsy8BVBpUtQDuY9ab2HsdMX1j28y/GGzY0NHDtMnu9MYzURZT+VxCKQK/g6hcqXICISzfQvnCgLCYU6g31Mnq9McIXfhLYYi1+2upSU9kCBMxQMMVQP/czFH/p1++bjYV4w3LEelMRnoN+Ntj3zbBL35gqNRUvQEVT0HQV4aQIdT9TVltm84aV4PXGiHQ/Dfk0qq5WXO7fTFS8AAH00TfZOvUw5dxUZYx4vI5rr72GhoaGivB6l/CxXwkWKVkJ3g8qfCx4DMPScVJZSFwk1Pc86Ybrym3SsvfrLYRw73OQaA/2S7ZWhgBXhAdECIxQsMRY6Pj/m3017tc49smHgNG4ubLbHuOsDAESVClCESiDr2IPVW6Gb7mwB15CGXgVoSjjIctKYMUIUAgwRlvE4ZPfK7M1lUd41PsZi1ioqRysiBhwDNM2yKUdlJ6j2INHyNRduUxnlgwMDHHhwkWGh+de0SASjbC6tZXGxoZl64MLDbyI0nsMIQRmaOV4P1hhAhRKcIOzSYfw4W+QvenzSLF0XQ2e59HT20v7xQ4ymYXtKJQcSXLixEnOnjvHqlUtrGppKdnqBjPjEzr6bQCMsFnxHc9TWVECBDBDFrlMDhIXCHf9guSqm0t+jpyTo7Orm46ODly3uB3VnazD2TPnuHD+Is3NzaxZ3Trrun2LIdrxBMrQeYSijHfaryRWnAARYIYtMsMZ7KP/h3TT6/HVha8oPxfJkSQdnZ309PSWbKk2z/Po6Oigo6OTeH0da9esnr5lVpEIz8E+9l0ArKi5omK/MUouwN/4/cXNefjuV5+c9zvGaCzoZYaInXuUoU3vWcQZg/iuvb2DoaGlnIUnGegfYKB/oGRxYuzcDyEziKqpC+73e8s7Fhc3f/hLpZ0zs2JawVOxR7fnMo9/DyMzfd/hhXLk8FGOHj22xOKbzFicePRI8TPWjEwX5olgpXsrVpoaoBysWAGqhoZu6UgvT82LXwWKW2R89Zql3Z51LlpXtxZ5pCT60lfAddAtfXxRp5XIihUgBF5QKAqi9zjRiz8tqoy6urqSZj8vlFWrWojH599+YSaiFx9D7XkZoQjs6Mr1frAEMeBYDFfTXFPqoqcx9gDSiTT24X8h23A1eWvuhbpnYtPmjQyPjJBKLc/2pZFohE2bNhZ1rJ7twzoSdLuMvYCF8OOHjxR13kT30uylvKI9IARJl5qpg5uj5sg/U0y2jKIoXLlzB5a19N7Esix27tiOUtRCmJLY4a8g8ll0U6/4bOeFsOIFCGDH7GCcuPNFYmeL2TMJDNPgyiuXZkbc+DmMxZ2j5sz3UbsOB54/VoJNbiqAy0KAiiKCVrEA68i/Yg8W17q0bZtrdl1NOBwusYUQDoe4+prXYdvFCccaehnz6HdBQGj0hbscuCwECEFVbIYMkJLos19AcwaKKsc0DK5+3VXUxevm//ICicfjXP2612GZxY1UaM4g0Wf/F0gfM2QGIcdlwmUjQAArbKMZGjgj1D7/BYQsbhhN1VR27tjBlrbNaItIsdd0nba2LezYsb349HjpUXvoi4jsMJqhYUVWdqt3KpeVABEQqgmhKAKl7yR1x75edPKqELCqpYUbrr+WdevWFjTXwzAM1q1bxw3XX0tLS/Mihsgkdce+GmS6KAqhUmxuWGGs3B7MWRCKIFQbJjWYRHv1caLSYOTKDxddnqZprF8fbH06NJhgYHCIVHKETNYZT1TQNA3LtoiEI8TjddTW1JQkRosc+yb6q08ghCBUW3iXy0qg5JGsHPjGokbxH/hvQR/XYvsR845Leijo10te8V7Sbe9eVHnLTfjkvxE+8W+jjY7QortcxvrxPvS59y2qHBH/YEk1c/m9UqPopoYdC/ZSixx/kPRwf5ktWjiZkYFAfASdzZdDf99sXLYChGBpjzGS/Z2khubfibPcpIf7Ge67lFyxUqZXFstlFwPOhgSSgz1I3yMSX1Vuc6YhkST7u1aUpy4FJRdgqWK4pSKV6MfL54k1ra2Y9HUpfYZ728mmlma8dSLf/9/F5fNVx4JLSDY9zGDnGTw3X25T8N08Q51nl0V8lchrUoAAeSfNQPsrZNPz79u7VGRTw/S1v0LOSZfNhnLzmokBZ8L3PRLd58mGa4jVr0JRl+d2eJ5LcqCLbLK6Ec9rWoBjOKkE/ZkkodpGwrE4iCWqGKRPaniA1FAv0q+UHdzLS1WAo/i+R3IgaIWGaxqwo3WIEgnR932yyUHSib6KiDsriaoAp+C7eUb6O0kOdmOFa7EiNRhW4elZEkk+m8ZJJsimhvD94uasXO5UBTgL0vfJjAyQGRlAUVR0O4RuhtF1A0U3UVRtPKvZ932k5+LlHfL5HG42hZNNV6vZBbAi5wUvN77v4aRGcFIj5TZl0VTnBVepMoGqAKuUlaoAq5SVFT0vuErhVOcFV6kygaoAq5SVqgCrlJWqAKuUlaoAq5SVqgCrlJWqAKtUqVKlSpUqVapUqbKs/H/QinrcpQccvAAAAABJRU5ErkJggg==`}));
+            });
+            $("#accountModifier").click(function () {
+                socket.emit("modify-account", JSON.stringify({'name': $("#newFirstname").val(), 'surname': $("#newLastname").val(), 'password': $("#newPassword").val(), 'nickname': $("#newNickname").val(), 'avatar': "AVATAR"}));
+            });
+            $("#logger").click(function () {
+                socket.emit("login", JSON.stringify({'password': $("#logPassword").val(), 'nickname': $("#nickname").val()}));
+            });
+            $("#accountViewer").click(function () {
+                socket.emit("view-account", $("#nickname").val());
+            });
+            $("#roomCreator").click(function () {
+                socket.emit("create-chat-room", $("#newRoomId").val());
+            });
+            $("#roomKiller").click(function () {
+                socket.emit("delete-chat-room", $("#newRoomId").val());
+            });
+            $("#roomAccessor").click(function () {
+                socket.emit("enter-chat-room", $("#joinRoomId").val());
+            });
+            $("#roomLeaver").click(function () {
+                socket.emit("leave-chat-room", $("#joinRoomId").val());
+            });
+            $("#sender").click(function () {
+                socket.emit("send-message", JSON.stringify({'roomId': $("#msgRoomId").val()?$("#msgRoomId").val():"main", 'message': $("#msg").val()}));
+            });
+            $("#history_fetcher").click(function () {
+                socket.emit("chat-room-history", $("#roomHistoryName").val()?$("#roomHistoryName").val():"main");
+            });
+            $("#channels_fetcher").click(function () {
+                socket.emit("get-all-rooms");
+            });
+            $("#gameDestroyer").click(function () {
+                socket.emit("delete-game", $("#gameId").val());
+            });
+            $("#partyCreator").click(function () {
+                socket.emit("create-party", JSON.stringify({'name': $("#newPartyName").val(), 'difficulty': 1, 'mode': 0, 'platform': 1}));
+            });
+            $("#partyAccessor").click(function () {
+                socket.emit("join-party", $("#newPartyName").val());
+            });
+            $("#partyPooper").click(function () {
+                socket.emit("leave-party", $("#newPartyName").val());
+            });
+            $("#partiesFetcher").click(function () {
+                socket.emit("get-all-parties");
+            });
+            $("#partyLauncher").click(function () {
+                socket.emit("start-game");
+            });
+            $("#answerProposer").click(function () {
+                socket.emit("answer", $("#answer").val());
+            });
+            $("#strokeSender").click(function () {
+                socket.emit("stroke", JSON.stringify({"points":["621,286.776672363281","623,287.776672363281","624,289.776672363281","626,290.776672363281","627,291.776672363281","629,293.776672363281","630,294.776672363281","632,296.776672363281","633,296.776672363281","634,298.776672363281","636,299.776672363281","636,300.776672363281","638,300.776672363281","638,301.776672363281","639,301.776672363281","639,302.776672363281","640,302.776672363281"],"hexColor":"#000000","stylusPoint":"Ellipse","strokeWidth":11.0}));
+            });
+        </script>
+    </body>
+</html>

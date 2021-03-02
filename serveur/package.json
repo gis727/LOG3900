@@ -1,0 +1,87 @@
+{
+  "name": "server",
+  "description": "Server for the game 'Fais mois un dessin'",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node out/www.js",
+    "launch": "tsc && concurrently --kill-others \"tsc -w \" \"nodemon out/www.js\" ",
+    "lint": "tslint --project tsconfig.json \"./app/**/*.ts\" --format stylish",
+    "fix-lint": "tslint --project tsconfig.json \"./app/**/*.ts\" --format stylish --fix",
+    "test": "mocha",
+    "coverage": "nyc mocha",
+    "tsc": "tsc",
+    "tsc:w": "tsc -w",
+    "clean": "rimraf out node_modules",
+    "postinstall": "rimraf false",
+    "deploy": "tsc && py deployer.py"
+  },
+  "nyc": {
+    "check-coverage": true,
+    "per-file": true,
+    "include": [
+      "app/services/**/*.ts"
+    ],
+    "extension": [
+      ".ts"
+    ],
+    "exclude": [
+      "**/*.spec.ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ],
+    "reporter": [
+      "html",
+      "text"
+    ],
+    "all": true,
+    "cache": true,
+    "sourceMap": true,
+    "instrument": true
+  },
+  "dependencies": {
+    "@types/bcrypt": "^3.0.0",
+    "@types/mongoose": "^5.5.41",
+    "@types/socket.io": "^2.1.4",
+    "bcrypt": "^3.0.8",
+    "body-parser": "latest",
+    "cloudinary": "^1.19.0",
+    "cookie-parser": "latest",
+    "cors": "latest",
+    "debug": "latest",
+    "express": "latest",
+    "inversify": "latest",
+    "mongoose": "^5.8.9",
+    "morgan": "latest",
+    "nodemon": "latest",
+    "reflect-metadata": "latest",
+    "serve-favicon": "latest",
+    "server": "^1.0.27",
+    "socket.io": "latest",
+    "ts-node": "latest"
+  },
+  "devDependencies": {
+    "@types/body-parser": "latest",
+    "@types/chai": "latest",
+    "@types/cookie-parser": "latest",
+    "@types/cors": "latest",
+    "@types/express": "latest",
+    "@types/express-serve-static-core": "latest",
+    "@types/mocha": "latest",
+    "@types/morgan": "latest",
+    "@types/node": "latest",
+    "@types/node-uuid": "latest",
+    "@types/sinon": "latest",
+    "chai": "latest",
+    "concurrently": "latest",
+    "mocha": "latest",
+    "nyc": "latest",
+    "rimraf": "latest",
+    "sinon": "latest",
+    "tslint": "latest",
+    "tslint-eslint-rules": "latest",
+    "tslint-microsoft-contrib": "latest",
+    "typescript": "latest"
+  }
+}

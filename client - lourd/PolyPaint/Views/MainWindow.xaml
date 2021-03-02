@@ -1,0 +1,47 @@
+﻿<Window x:Class="PolyPaint.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PolyPaint.Views"
+        xmlns:gameCreation="clr-namespace:PolyPaint.Views.GameCreation"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        WindowStyle="SingleBorderWindow"
+        Title="Draw me something" Height="1050" Width="1850" ResizeMode="CanMinimize">
+    <Grid>
+        <DockPanel x:Name="mainPanel">
+
+            <materialDesign:ColorZone materialDesign:ShadowAssist.ShadowDepth="Depth2" DockPanel.Dock="Right">
+                <local:ChatUC x:Name="ChatUC" Margin="5" Width="350"></local:ChatUC>
+            </materialDesign:ColorZone>
+
+            <materialDesign:ColorZone Width="250" x:Name="ProfilePanel"
+          Mode="PrimaryLight"
+          materialDesign:ShadowAssist.ShadowDepth="Depth3" DockPanel.Dock="Left">
+                <StackPanel Height="1050">
+                    <local:ProfileUC x:Name="ProfileUC" Margin="5 0 5 0" Height="950" Loaded="ProfileUC_Loaded"></local:ProfileUC>
+                    <Button Style="{DynamicResource MaterialDesignFlatButton}" x:Name="LogoutButton">
+                        Log Out
+                    </Button>
+                </StackPanel>
+            </materialDesign:ColorZone>
+
+
+            <materialDesign:Transitioner x:Name="Transitioner" SelectedIndex="0" Margin="0">
+
+                <local:MainLobbyPage x:Name="MainLobbyPage" CreateGame="CreateGame_Click" KickedOut="MainLobbyPage_KickedOut"/>
+
+                <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect SlideInFromRight}">
+
+                    <gameCreation:GameCreationPage x:Name="GameCreationPage" GameCreationFinished="GameCreation_Finished"/>
+                </materialDesign:TransitionerSlide>
+            </materialDesign:Transitioner>
+        </DockPanel>
+
+        <!--Connection error snackbar-->
+        <materialDesign:Snackbar HorizontalAlignment="Center"  Name="GlobalSnackbar">
+            <materialDesign:SnackbarMessage/>
+        </materialDesign:Snackbar>
+    </Grid>
+</Window>

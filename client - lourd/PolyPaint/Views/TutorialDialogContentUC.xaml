@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="FMUD.Views.TutorialDialogContentUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FMUD.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+           >
+    <StackPanel Orientation="Vertical" Width="800" Height="800">
+        <StackPanel.Background>
+            <ImageBrush ImageSource="../Resources/abstract.png"></ImageBrush>
+        </StackPanel.Background>
+        <!--Header-->
+        <TextBlock FontWeight="UltraBold" Foreground="White" Margin="0 45 0 20" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignHeadline3TextBlock}"> Tutorial
+        </TextBlock>
+        <materialDesign:Card Margin="50 10 50 10">
+            <StackPanel>
+                <TreeView FontWeight="Medium" FontSize="15" Margin="50 50 50 50" x:Name="TutorialTree">
+                    <!--Complete overview a selectrioner LA PREMIERE FOIS.-->
+                    <TreeViewItem FontWeight="Bold" Header="Complete overview" Selected="LaunchCompleteTutorial"></TreeViewItem>
+                    <TreeViewItem Header="Game Creation">
+                        <TreeViewItem Header="Drawing your own game" Selected="LaunchDrawingGameTutorial"></TreeViewItem>
+                        <TreeViewItem Header="Pick your own game" Selected="LaunchPickingGameTutorial"></TreeViewItem>
+                    </TreeViewItem>
+                    <TreeViewItem Header="Party Creation" Selected="LaunchCreatePartyTutorial">
+                    </TreeViewItem>
+                    <TreeViewItem Header="In-Game Mechanics">
+                        <TreeViewItem Header="Free-for-all" Selected="LaunchFFATutorial"></TreeViewItem>
+                        <TreeViewItem Header="Solo Sprint" Selected="LaunchSoloTutorial"></TreeViewItem>
+                        <TreeViewItem Header="Collaborative Sprint" Selected="LaunchCollabTutorial"></TreeViewItem>
+                    </TreeViewItem>
+                    <TreeViewItem Header="Chat Commands" Selected="LaunchChatTutorial"/>
+                </TreeView>
+                <!--Zone tutoriel-->
+                <Border x:Name="TutorialImageContainer" Visibility="Collapsed" Height="500">
+                    <Button Margin="650 0 0 450" Click="resetWhenTutorialClosed" DockPanel.Dock="Right" Style="{StaticResource MaterialDesignIconButton}">
+                        <materialDesign:PackIcon Kind="Close" />
+                    </Button>
+                </Border>
+                <Separator x:Name="TutoSeparator" Margin="0" Visibility="Collapsed" Style="{StaticResource MaterialDesignDarkSeparator}"></Separator>
+                <Border BorderThickness="0" x:Name="TutorialDescriptionContainer" Height="100" Visibility="Collapsed">
+                    <DockPanel>
+                        <Button x:Name="TutorialNextButton" DockPanel.Dock="Right" Style="{StaticResource MaterialDesignIconButton}">
+                            <materialDesign:PackIcon Kind="ArrowRight" />
+                        </Button>
+                        <TextBlock FontWeight="Medium" Margin="15" TextAlignment="Center" TextWrapping="Wrap" Style="{StaticResource MaterialDesignSubtitle1TextBlock}" x:Name="TutorialImageDescription">Description</TextBlock>
+                    </DockPanel>
+                </Border>
+            </StackPanel>
+        </materialDesign:Card>
+
+
+    </StackPanel>
+</UserControl>

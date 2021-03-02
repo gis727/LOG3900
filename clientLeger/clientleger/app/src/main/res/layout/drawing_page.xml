@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:custom="http://schemas.android.com/apk/res-auto"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="#FFFFFF"
+android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/guess_word"
+        android:layout_width="572dp"
+        android:layout_height="84dp"
+        android:text="TextView"
+        custom:layout_constraintEnd_toEndOf="parent"
+        custom:layout_constraintHorizontal_bias="0.392"
+        custom:layout_constraintStart_toStartOf="parent"
+        custom:layout_constraintTop_toTopOf="parent" />
+
+    <com.example.client_leger.CanvasView
+        android:id="@+id/canvas"
+        android:layout_width="610dp"
+        android:layout_height="837dp"
+        android:textColor="#FFFFFF"
+        custom:layout_constraintBottom_toBottomOf="parent"
+        custom:layout_constraintEnd_toEndOf="parent"
+        custom:layout_constraintStart_toStartOf="parent"
+        custom:layout_constraintTop_toBottomOf="@+id/guess_word" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

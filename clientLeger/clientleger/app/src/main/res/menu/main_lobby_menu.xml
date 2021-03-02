@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/show_tutorial_button"
+        android:icon="@drawable/help_circle"
+        android:title="show_tutorial_button"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/create_party_button"
+        android:icon="@drawable/ic_add_to_photos_24dp"
+        android:title="@string/create_party_button"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/filter_parties_button"
+        android:icon="@drawable/ic_filter_menu"
+        android:title="filter_parties_button"
+        app:showAsAction="always"/>
+</menu>

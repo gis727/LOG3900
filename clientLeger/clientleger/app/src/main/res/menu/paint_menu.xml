@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group
+        android:id="@+id/pointer_type">
+
+        <item
+            android:title="Pen"
+            android:id="@+id/imgPen"
+            android:icon="@drawable/ic_mode_edit_white_24dp"
+            android:iconTint="@color/colorBlack"
+            app:showAsAction="always"/>
+
+        <item
+            android:title="Eraser"
+            android:id="@+id/imgErase"
+            android:icon="@drawable/eraser"
+            android:iconTint="@color/colorBlack"
+            app:showAsAction="always"/>
+
+        <item
+            android:title="StrokeEraser"
+            android:id="@+id/stroke_eraser"
+            android:icon="@drawable/pencil_remove"
+            android:iconTint="@color/colorBlack"
+            app:showAsAction="always"/>
+
+    </group>
+
+    <group
+        android:id="@+id/pointer_tip">
+
+<!--        <item-->
+<!--            android:id="@+id/square_brush"-->
+<!--            android:icon="@drawable/square_medium"-->
+<!--            android:title="Square"-->
+<!--            app:showAsAction="always" />-->
+
+<!--        <item-->
+<!--            android:id="@+id/circle_brush"-->
+<!--            android:icon="@drawable/circle_medium"-->
+<!--            android:title="Circle"-->
+<!--            app:showAsAction="always" />-->
+
+
+    </group>
+
+</menu>

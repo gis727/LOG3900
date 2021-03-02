@@ -1,0 +1,40 @@
+﻿<Window x:Class="PolyPaint.Views.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:PolyPaint.Views"
+        xmlns:gif="http://wpfanimatedgif.codeplex.com"
+        mc:Ignorable="d"
+        FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
+        Title="LoginWindow" Height="700" Width="1200" ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        FocusManager.FocusedElement="{Binding ElementName=Nickname}">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="1" />
+            <ColumnDefinition Width="300" />
+        </Grid.ColumnDefinitions>
+        <StackPanel Width="300" Grid.Column="2" Grid.ZIndex ="1">
+            <materialDesign:ColorZone Mode="Light">
+                <Button Click="Close_Button_Click" VerticalAlignment="Top" HorizontalAlignment="Right" ToolTip="Close" Background="Transparent" BorderBrush="Transparent" Width="20" Height="15" Padding="0">
+                    <materialDesign:PackIcon Kind="WindowClose" Margin="0"></materialDesign:PackIcon>
+                </Button>
+            </materialDesign:ColorZone>
+            <local:LoginPage x:Name="LoginPage" Visibility="Visible" LoggedIn="OnLogin" SignUp="Sign_Up_Click" Loaded="LoginPage_Loaded"/>
+            <local:RegistrationPage x:Name="RegistrationPage" Visibility="Collapsed" Registered="OnLoginFirstTime" Canceled="Registration_Canceled"/>
+        </StackPanel>
+        <Grid>
+            <Image Grid.ZIndex ="0" Height="1050" gif:ImageBehavior.AnimatedSource="../Resources/reallogin.gif" />
+
+            <TextBlock Margin="0 150 0 0" Grid.ZIndex ="3" Foreground="White" FontSize="200" FontWeight="UltraBlack" FontStretch="Medium" TextWrapping="WrapWithOverflow" Style="{StaticResource MaterialDesignHeadline1TextBlock}">draw</TextBlock>
+            <TextBlock Margin="230 240 0 0" Grid.ZIndex ="2" Foreground="White" FontSize="200" FontWeight="UltraBlack" FontStretch="Medium" TextWrapping="WrapWithOverflow" Style="{StaticResource MaterialDesignHeadline1TextBlock}">me</TextBlock>
+
+            <TextBlock Margin="-50 320 0 0" Grid.ZIndex ="1" Foreground="White" FontSize="200" FontWeight="UltraBlack" FontStretch="Medium" TextWrapping="WrapWithOverflow" Style="{StaticResource MaterialDesignHeadline1TextBlock}">something</TextBlock>
+        </Grid>
+    </Grid>
+</Window>

@@ -1,0 +1,68 @@
+﻿<UserControl x:Class="FMUD.Views.LiveGame.LiveGameUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FMUD.Views.LiveGame"
+             xmlns:gif="http://wpfanimatedgif.codeplex.com"
+             mc:Ignorable="d" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local1="clr-namespace:FMUD.Views"
+             >
+    <Grid>
+        <Grid.Background>
+            <SolidColorBrush Color="Black" Opacity="0.2"></SolidColorBrush>
+        </Grid.Background>
+
+        <!--The game stuff-->
+        <StackPanel Margin="0 10 10 0" Grid.ZIndex ="0">
+
+
+            <Button StackPanel.ZIndex ="2" HorizontalAlignment="Right" Margin="0 5 5 0" Style="{DynamicResource MaterialDesignIconButton}" Height="32" Width="32" Click="Tutorial_Click">
+                <materialDesign:PackIcon Kind="HelpCircleOutline" Height="30" Width="30"/>
+            </Button>
+
+            <!--Stats-->
+            <local:StatsUC Grid.ZIndex ="0" VerticalAlignment="Center" x:Name="Stats" Margin="20 0,30,0" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" StatsUpdated="Stats_StatsUpdated"/>
+
+            <!--Drawer-->
+            <local:GameDrawer  Width="1282" Height="850" Grid.ZIndex ="0" Margin="20 0 20 0"  VerticalAlignment="Center" x:Name="DrawerUC"/>
+            
+        </StackPanel>
+
+
+        <!--Particles-->
+        <StackPanel x:Name="winText" Grid.ZIndex ="0"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Visibility="Collapsed">
+            <StackPanel.Background>
+
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1" >
+
+                    <GradientStop Color="MediumOrchid" Offset="0" />
+
+                    <GradientStop Color="MediumTurquoise" Offset="1" />
+
+                </LinearGradientBrush>
+
+        </StackPanel.Background>
+            <TextBlock x:Name="scoreText" Padding="30 20 30 0" Margin="0 0 0 -50" TextAlignment="Center" FontWeight="Bold" Grid.ZIndex ="1" Foreground="White" Style="{StaticResource MaterialDesignHeadline1TextBlock}">You have won with</TextBlock>
+            <TextBlock x:Name="score" Padding="30 0 30 0"  Margin="0 0 0 -50" FontSize="200" TextAlignment="Center" Grid.ZIndex ="1" FontWeight="UltraBlack" Foreground="Khaki" Style="{StaticResource MaterialDesignHeadline1TextBlock}">500</TextBlock>
+            <TextBlock Padding="30 0 30 20" TextAlignment="Center" FontWeight="Bold" Foreground="White" Grid.ZIndex ="1" Style="{StaticResource MaterialDesignHeadline1TextBlock}"> points!</TextBlock>
+        </StackPanel>
+        <Image x:Name="con"  Margin="0" Width="1000" Grid.ZIndex ="0" gif:ImageBehavior.AnimatedSource="../../Resources/confettis.gif" Visibility="Collapsed"/>
+        <Image x:Name="fetti" Margin="0" Width="500" Grid.ZIndex ="0" gif:ImageBehavior.AnimatedSource="../../Resources/confetters.gif" Visibility="Collapsed"/>
+
+
+        <!--The snack bar-->
+        <materialDesign:Snackbar Grid.ZIndex ="2" HorizontalAlignment="Center"  Name="Snackbar">
+            <materialDesign:SnackbarMessage/>
+        </materialDesign:Snackbar>
+        <!--Tutorial dialog-->
+        <materialDesign:DialogHost Grid.ZIndex ="1" Name="TutorialDialog" CloseOnClickAway="True" DialogClosing="resetWhenTutorialClosed">
+            <materialDesign:DialogHost.DialogContent>
+
+                <local1:TutorialDialogContentUC Grid.ZIndex ="1" x:Name="TutorialUC"/>
+
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
+    </Grid>
+</UserControl>

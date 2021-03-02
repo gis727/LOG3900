@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="totalNewMessages"
+            type="Integer" />
+
+        <variable
+            name="isShowingChannels"
+            type="boolean" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/social_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:background="@color/colorWhite"
+        tools:context=".SocialFragment">
+
+<!--        <View-->
+<!--            android:id="@+id/border"-->
+<!--            android:layout_width="2dp"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:background="@color/colorPrimaryDark"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/social_bar" />-->
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/social_bar"
+            android:layout_width="0dp"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/lighterGrey"
+            android:elevation="4dp"
+            android:padding="8dp"
+            app:itemIconTint="@color/colorBlack"
+            android:theme="@style/ToolbarTheme"
+            app:buttonGravity="center_vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:titleTextAppearance="@style/TextAppearance.SocialToolBarTitle"
+            app:titleTextColor="@color/primaryText" >
+
+            <TextView
+                android:id="@+id/new_message_indicator"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:textSize="10dp"
+                android:background="@drawable/new_message_indicator_background"
+                android:gravity="center"
+                android:padding="2dp"
+                android:layout_marginStart="4dp"
+                android:text="@{String.valueOf(totalNewMessages.intValue())}"
+                android:visibility="@{isShowingChannels &amp;&amp; (totalNewMessages.intValue() > 0) ? View.VISIBLE : View.INVISIBLE}" />
+
+
+        </com.google.android.material.appbar.MaterialToolbar>
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/social_container"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/social_bar"
+            android:background="@color/colorWhite"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

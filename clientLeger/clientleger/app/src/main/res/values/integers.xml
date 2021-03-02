@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer-array name="tutorial_overview_images">
+        <item>@drawable/tutorial_overview_1</item>
+        <item>@drawable/tutorial_overview_2</item>
+        <item>@drawable/tutorial_overview_3</item>
+        <item>@drawable/tutorial_overview_4</item>
+        <item>@drawable/tutorial_overview_5</item>
+        <item>@drawable/tutorial_overview_6</item>
+        <item>@drawable/tutorial_overview_7</item>
+        <item>@drawable/tutorial_overview_8</item>
+        <item>@drawable/tutorial_overview_9</item>
+        <item>@drawable/tutorial_overview_10</item>
+        <item>@drawable/tutorial_overview_11</item>
+        <item>@drawable/tutorial_overview_12</item>
+        <item>@drawable/tutorial_overview_12</item>
+        <item>@drawable/tutorial_overview_13</item>
+        <item>@drawable/tutorial_overview_14</item>
+    </integer-array>
+
+    <integer-array name="tutorial_party_creation_images">
+        <item>@drawable/tutorial_creation_1</item>
+        <item>@drawable/tutorial_creation_2</item>
+        <item>@drawable/tutorial_creation_3</item>
+        <item>@drawable/tutorial_creation_4</item>
+    </integer-array>
+
+    <integer-array name="tutorial_ffa_images">
+        <item>@drawable/tutorial_ffa_1</item>
+        <item>@drawable/tutorial_ffa_2</item>
+        <item>@drawable/tutorial_ffa_3</item>
+        <item>@drawable/tutorial_ffa_4</item>
+        <item>@drawable/tutorial_ffa_5</item>
+        <item>@drawable/tutorial_ffa_6</item>
+        <item>@drawable/tutorial_ffa_7</item>
+        <item>@drawable/tutorial_ffa_8</item>
+        <item>@drawable/tutorial_ffa_9</item>
+    </integer-array>
+
+    <integer-array name="tutorial_solo_images">
+        <item>@drawable/tutorial_creation_1</item>
+        <item>@drawable/tutorial_solo_1</item>
+        <item>@drawable/tutorial_solo_2</item>
+        <item>@drawable/tutorial_solo_3</item>
+        <item>@drawable/tutorial_solo_4</item>
+        <item>@drawable/tutorial_solo_5</item>
+        <item>@drawable/tutorial_solo_6</item>
+        <item>@drawable/tutorial_solo_7</item>
+    </integer-array>
+
+    <integer-array name="tutorial_coop_images">
+        <item>@drawable/tutorial_coop_1</item>
+        <item>@drawable/tutorial_coop_2</item>
+        <item>@drawable/tutorial_coop_3</item>
+        <item>@drawable/tutorial_coop_4</item>
+        <item>@drawable/tutorial_coop_5</item>
+        <item>@drawable/tutorial_coop_6</item>
+        <item>@drawable/tutorial_solo_6</item>
+        <item>@drawable/tutorial_solo_7</item>
+    </integer-array>
+
+    <integer-array name="tutorial_commands_images">
+        <item>@drawable/tutorial_commands_1</item>
+        <item>@drawable/tutorial_commands_2</item>
+        <item>@drawable/tutorial_solo_4</item>
+        <item>@drawable/tutorial_solo_5</item>
+        <item>@drawable/tutorial_solo_6</item>
+        <item>@drawable/tutorial_solo_7</item>
+    </integer-array>
+</resources>

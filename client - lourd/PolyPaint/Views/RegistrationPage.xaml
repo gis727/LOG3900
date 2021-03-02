@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="PolyPaint.Views.RegistrationPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
+        FocusManager.FocusedElement="{Binding ElementName=Nickname}">
+    <Grid>
+        <materialDesign:ColorZone Mode="Light" Height="700">
+            <StackPanel Margin="0,80,0,0">
+                <Grid Margin="20, 30, 20, 30">
+                    <TextBlock Text="it's nice to meet you." Foreground="Magenta" Grid.ZIndex="0" HorizontalAlignment="Center" FontWeight="ExtraBold" FontSize="27" Style="{StaticResource MaterialDesignSubtitle2TextBlock}">
+                        <TextBlock.RenderTransform>
+                            <RotateTransform Angle="-3" />
+                        </TextBlock.RenderTransform>
+                    </TextBlock>
+                    <TextBlock Foreground="Cyan" Grid.ZIndex="1" HorizontalAlignment="Center" FontWeight="ExtraBold" FontSize="27" Style="{StaticResource MaterialDesignSubtitle2TextBlock}">
+                        it's nice to meet you.
+                    </TextBlock>
+                </Grid>
+
+                <Button  Style="{StaticResource MaterialDesignFloatingActionLightButton}" Width="70" Height="70" Click="Avatar_Button_Click">
+                    <Grid Margin="0">
+                        <materialDesign:PackIcon x:Name="AvatarIcon" Width="30" Height="30" Kind="ImagePlus"/>
+                        <Image x:Name="AvatarImage" Visibility="Collapsed" Source="..\Resources\avatar.jpg" Stretch="UniformToFill"/>
+                    </Grid>
+                </Button>
+                <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" x:Name="FirstName" Margin="90, 20, 90, 20" materialDesign:HintAssist.Hint="First name" TextChanged="Credentials_Changed"/>
+                <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" x:Name="LastName" Margin="90, 0, 90, 20" materialDesign:HintAssist.Hint="Last name" TextChanged="Credentials_Changed"/>
+                <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" x:Name="NickName" Margin="90, 0, 90, 20" materialDesign:HintAssist.Hint="Username" TextChanged="Credentials_Changed"/>
+                <PasswordBox Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" x:Name="Password" Margin="90, 0, 90, 0" materialDesign:HintAssist.Hint="Password" PasswordChanged="Credentials_Changed" />
+
+                <TextBlock x:Name="ErrorText"  Foreground="Red" FontSize="10" TextAlignment="Center" Margin="15"/>
+                <Button Foreground="White" x:Name="SubmitButton" Height="35" Click="Submit_Button_Click" IsEnabled="False" Style="{StaticResource MaterialDesignRaisedAccentButton}"  Width="80">
+                    Create
+                </Button>
+                <Button x:Name="CancelButton" Click="Cancel_Button_Click" IsEnabled="True" Style="{StaticResource MaterialDesignIconButton}" Margin="-250, 0, 0, 0">
+                    <materialDesign:PackIcon x:Name="ArrowLeft" Width="39" Height="30" Kind="ArrowLeft"/>
+                </Button>
+                <ProgressBar Style="{StaticResource MaterialDesignCircularProgressBar}"
+                            Value="0" IsIndeterminate="True" Margin="10 0 0 0"
+                            Name="CreationProgress" Visibility="Collapsed"/>
+            </StackPanel>
+        </materialDesign:ColorZone>
+    </Grid>
+</UserControl>

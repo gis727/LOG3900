@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.textfield.TextInputLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/add_channel_layout"
+    android:layout_width="200dp"
+    android:layout_height="?attr/actionBarSize"
+    android:hint="@string/channels_add_label"
+    app:endIconMode="custom"
+    app:endIconDrawable="@drawable/ic_group_add_24px"
+    app:boxBackgroundColor="@color/lightGrey"
+    app:hintTextColor="@color/secondaryText"
+    android:textColorHint="@color/secondaryText"
+    app:endIconTint="@color/colorBlack"
+    app:boxStrokeColor="@color/colorBlack">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/channel_name_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/primaryText"
+        android:textSize="16sp"/>
+
+</com.google.android.material.textfield.TextInputLayout>

@@ -1,0 +1,226 @@
+<resources>
+    <string name="app_name">Draw me something</string>
+    <string name="register_text"><u>here</u></string>
+    <string name="title_activity_login2">Sign in</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+
+    <!-- Authentication errors -->server_error
+    <string name="server_error">An internal problem has occurred. Please try again later</string>
+    <string name="bad_format">Some fields have an invalid format</string>
+    <string name="id_already_used">This username is already taken</string>
+    <string name="already_connected">A user is already connected with this username</string>
+    <string name="wrong_credential">The password doesn\'t match the username</string>
+
+    <!-- Profile labels -->
+
+    <string name="label_nickname">Nickname</string>
+    <string name="label_first_name">First Name</string>
+    <string name="label_last_name">Last Name</string>
+    <string name="label_password">Password</string>
+    <string name="label_language">Language</string>
+
+    <!-- Profile tabs -->
+
+    <string name="identity_tab">Identity</string>
+    <string name="statistics_tab">Statistics</string>
+    <string name="match_history_tab">Party History</string>
+    <string name="activity_history_tab">Activity History</string>
+
+    <!-- Profile Buttons -->
+
+    <string name="edit_profile">Edit</string>
+    <string name="choose_picture">Choose image</string>
+    <string name="save_changes">Save changes</string>
+    <string name="discard_changes">Discard changes</string>
+
+    <!-- Languages -->
+    <string name="english">English</string>
+    <string name="francais">Français</string>
+
+    <!-- Profile statistics -->
+    <string name="total_matches_played">Total parties played</string>
+    <string name="total_time_played">Total minutes played</string>
+    <string name="win_percentage">Win percentage</string>
+    <string name="total_wins">Total wins</string>
+    <string name="average_match_time">Average party time</string>
+    <string name="highest_score">Top score</string>
+
+    <!-- Played match attributes -->
+
+    <string name="match_date">Match date</string>
+    <string name="match_name">Match name</string>
+    <string name="match_type">Match type</string>
+    <string name="match_score">Final score</string>
+    <string name="match_result">Result</string>
+    <string name="match_players">Players</string>
+
+    <string name="match_platform">Platform</string>
+
+    <!-- Activity history attributes -->
+
+    <string name="connection_date">Connection date</string>
+    <string name="disconnection_date">Disconnection date</string>
+
+    <!-- Game Modes -->
+    <string name="free_for_all">ffa</string>
+    <string name="sprint_solo">solo</string>
+    <string name="sprint_coop">coop</string>
+
+    <string name="filter_hint">Party mode</string>
+
+    <!-- Navigation drawer items -->
+
+    <string name="logout">Log out</string>
+    <string name="profile">View profile</string>
+    <string name="matchmaking">Matchmaking</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!-- Profile filter options -->
+    <string-array name="profile_filter_options">
+        <item>All</item>
+        <item>Free-for-all</item>
+        <item>Sprint solo</item>
+        <item>Sprint coop</item>
+    </string-array>
+
+    <!-- Channels -->
+    <string name="channels_fragment_title">Channels</string>
+    <string name="channels_add_label">New channel</string>
+    <string name="channels_add_helper">Add channel</string>
+    <string name="show_history_button">Show history</string>
+
+    <!-- Parties -->
+    <string name="party_player_placeholder">Empty</string>
+    <string name="create_party_button">Create party</string>
+    <string name="ready_party_button">READY</string>
+    <string name="leave_party_button">LEAVE</string>
+
+    <string-array name="party_modes">
+        <item>Free-for-all</item>
+        <item>Sprint solo</item>
+        <item>Sprint coop</item>
+    </string-array>
+
+    <string-array name="party_difficulties">
+        <item>None</item>
+        <item>Easy</item>
+        <item>Medium</item>
+        <item>Hard</item>
+    </string-array>
+
+    <string name="free_for_all_helper">
+        In this mode, you will compete against other players to earn as many points as possible.
+    </string>
+    <string name="sprint_solo_helper">
+        In this mode, you will compete alone against a virtual player to earn as many points as possible.
+    </string>
+    <string name="sprint_coop_helper">
+        In this mode, you will compete alongside other players against a virtual player to earn as many points as possible.
+    </string>
+
+    <string name="all_filter_helper">
+        Show all parties.
+    </string>
+    <string name="free_for_all_filter_helper">
+        In this mode, players compete against other players to earn as many points as possible.
+    </string>
+    <string name="sprint_solo_filter_helper">
+        In this mode, a player plays alone against a virtual player to earn as many points as possible.
+    </string>
+    <string name="sprint_coop_filter_helper">
+        In this mode, players play together against a virtual player to earn as many points as possible.
+    </string>
+
+
+    <string name="party_capacity">(%1$d / %2$d)</string>
+
+    <!-- Fragment tags -->
+    <string name="main_lobby_fragment">MainLobbyFragment</string>
+
+    <!-- Commands prefixes -->
+    <string name="guess_prefix">.g</string>
+    <string name="clue_prefix">.c</string>
+    <string name="kick_prefix">.k</string>
+    <string name="history_prefix">.h</string>
+
+    <!-- Tutorial pages descriptions -->
+    <string-array name="tutorial_overview_descriptions">
+        <item>Welcome to Draw me something! This is a game where you are rewarded for drawing well, and guessing well. Here is the main lobby.</item>
+        <item>You can access your profile and the log out button by clicking on your name in the top left corner.</item>
+        <item>This is the identity page of your profile. You can change the information by clicking on the circled button.</item>
+        <item>You can save your changes after filling out every field by clicking the save button. You can also discard your changes. </item>
+        <item>This is your profile statistics page. You can filter the statistics according to each party mode.</item>
+        <item>This is your party history page. You can filter your past parties according to each party mode.</item>
+        <item>This is your party activity history page where you can check your past playing sessions.</item>
+<!--        <item>To log out, click this button. Temporarily switching to other applications will keep you logged in.</item>-->
+        <item>This is the chat area.</item>
+        <item>Everyone is added to the main channel upon their connection and can chat in it.</item>
+        <item>You can also create your own channels or join other channels.</item>
+        <item>By clicking the circled button, you can subscribe to a channel and start receiving messages sent in it.</item>
+        <item>The middle section displays the current party lobbies. Join a lobby by clicking on it. Ongoing and full parties are displayed in darker colors and cannot be joined.</item>
+        <item>You can also see who is currently waiting in a lobby.</item>
+        <item>In the top part, you have a few things you can do, either get help, create parties or filter parties.</item>
+        <item>Thanks for sticking through this overview! Read more subjects over there.</item>
+    </string-array>
+
+    <string-array name="tutorial_party_creation_descriptions">
+        <item>Want to create a party? Press the circled button to launch the party creation menu.</item>
+        <item>Enter a name for your party. If you don\'t, a random one will be assigned.</item>
+        <item>Pick a game mode. A brief description is displayed for the selected game mode. </item>
+        <item>When you\'re ready, you can create the party by clicking the circled button.</item>
+    </string-array>
+
+    <string-array name="tutorial_ffa_descriptions">
+        <item>To play a free-for-all party, you must create it in the game creation menu or join an existing free-for-all party.</item>
+        <item>In the party lobby, you can add up to two virtual players.</item>
+        <item>Once you\'re ready to play, you can press the circled button. Once everyone is ready, the party will start.</item>
+        <item>Notice a new channel for the party has been created. You can discuss in this channel, give guesses and ask for hints.</item>
+        <item>This is the live party. The emphasized text tells you if you\'re the drawer or if someone else is.</item>
+        <item>Guess the secret word in the chat with the .g command. If you\'re right, you will be awarded points. If not, your number of guesses will decrease.</item>
+        <item>Make sure to guess before the time runs out for each game. Remember, in free-for-all, you have to accumulate the most points to win.</item>
+        <item>You can always ask for a clue with the .c command.</item>
+        <item>A bot will promptly give a clue in the party chat. The clue will be visible to all party members.</item>
+    </string-array>
+
+    <string-array name="tutorial_solo_descriptions">
+        <item>To play a solo party, you must create it in the game creation menu.</item>
+        <item>Once you\'re ready to play, you can press the circled button to start the party.</item>
+        <item>Notice a new channel for the party has been created. You can discuss in this channel, give guesses and ask for hints.</item>
+        <item>This is the drawing area. Your score is in the top left, and your number of guesses remaining for the current word being drawn is in the top right.</item>
+        <item>Guess the secret word in the chat with the .g command.</item>
+        <item>A bot will tell you whether you were right or wrong.</item>
+        <item>Whenever you guess right, or the drawing is done, or you\'ve ran out of guesses, a new drawing immediately starts. Guess as many words as you can before the timer runs out.</item>
+        <item>You can always ask for a clue with the .c command.</item>
+        <item>A bot will give you a clue in the party chat, but you will lose points.</item>
+    </string-array>
+
+    <string-array name="tutorial_coop_descriptions">
+        <item>To play a coop party, you must create it in the game creation menu or join an existing coop party.</item>
+        <item>In the party lobby, press ready when you are. The game starts when everyone is ready.</item>
+        <item>Notice a new channel for the party has been created. You can discuss in this channel, give guesses and ask for hints.</item>
+        <item>This is the drawing area. Your collective score is in the top left, and your collective number of guesses remaining for the current word being drawn is in the top right.</item>
+        <item>Guess the secret word in the chat with the .g command. If you\'re right, you will be awarded points. If not, your number of guesses will decrease.</item>
+        <item>Remember, in coop, you play as a team to guess as many words as you can before the timer runs out.</item>
+        <item>You can always ask for a clue with the .c command.</item>
+        <item>A bot will give you a clue in the party chat, but you will lose points.</item>
+    </string-array>
+
+    <string-array name="tutorial_commands_descriptions">
+        <item>The first command, .h, let\'s you view the current channel\'s history. Just type .h and then press the send button.</item>
+        <item>Older messages sent in the channel will then be displayed in the chat.</item>
+        <item>While in a party, guess the secret word in the chat with the .g command.</item>
+        <item>A bot will tell you whether you were right or wrong.</item>
+        <item>While in a party, you can always ask for a clue with the .c command.</item>
+        <item>A bot will promptly give a clue in the party chat. The clue will be visible to all party members.</item>
+    </string-array>
+
+</resources>

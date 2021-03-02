@@ -1,0 +1,193 @@
+﻿<UserControl x:Class="PolyPaint.Views.GameCreation.GameCreationPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PolyPaint.Views.GameCreation"
+             xmlns:local2="clr-namespace:FMUD"
+             xmlns:gif="http://wpfanimatedgif.codeplex.com"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:converters="clr-namespace:FMUD.Converters"
+             xmlns:local1="clr-namespace:FMUD.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <converters:GameDifficultyToInfoConverter x:Key="GameDifficultyToInfoConverter"></converters:GameDifficultyToInfoConverter>
+    </UserControl.Resources>
+    <Grid>
+        <DockPanel>
+            <Grid DockPanel.Dock="Top"  Background="{StaticResource MaterialDesignDarkBackground}">
+                <Button Grid.ZIndex ="1" x:Name="CancelButton" Click="CancelButton_Click" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignIconButton}">
+                    <materialDesign:PackIcon x:Name="ArrowLeft" Width="30" Height="30" Kind="ArrowLeft"/>
+                </Button>
+                <Button HorizontalAlignment="Right" Margin="0 0 15 0" Style="{DynamicResource MaterialDesignIconButton}" Height="32" Width="32" Click="Tutorial_Click">
+                    <materialDesign:PackIcon Kind="HelpCircleOutline" Height="30" Width="30"/>
+                </Button>
+            </Grid>
+
+
+            <Grid DockPanel.Dock="Top" Height="700">
+                <Image Grid.ZIndex ="0" Height="1500" gif:ImageBehavior.AnimatedSource="../../Resources/creategif.gif" />
+
+                <materialDesign:Transitioner Grid.ZIndex="1" x:Name="Transitioner" SelectedIndex="0" Margin="20">
+                    <StackPanel Grid.ZIndex="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock Foreground="White" Style="{StaticResource MaterialDesignHeadline2TextBlock}" Margin="0 10 0 0">
+                      Draw... or don't.
+                        </TextBlock>
+                        <Separator Margin="-30 2 -20 30"></Separator>
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Margin="0">
+                            <!--Image drawing button-->
+                            <Button Style="{StaticResource MaterialDesignFloatingActionLightButton}" ToolTipService.InitialShowDelay="0" ToolTip="Draw or edit your image" Width="50" Height="50" Click="Image_Draw_Button_Click">
+                                <Grid Margin="0">
+                                    <materialDesign:PackIcon Width="25" Height="25" Kind="Draw"/>
+                                    <Image x:Name="ImgDrawSelectorImage" Visibility="Collapsed" Stretch="UniformToFill"/>
+                                </Grid>
+                            </Button>
+
+                            <!--Image load button
+                            <Button Style="{StaticResource MaterialDesignFloatingActionLightButton}" ToolTipService.InitialShowDelay="0" ToolTip="Upload your own image" Width="50" Height="50" Click="Image_Load_Click" Margin="20 0 0 0">
+                                <Grid Margin="0">
+                                    <materialDesign:PackIcon Width="25" Height="25" Kind="Upload"/>
+                                    <Image x:Name="ImgLoadSelectorImage" Visibility="Collapsed" Stretch="UniformToFill"/>
+                                </Grid>
+                            </Button>-->
+
+                            <!--Google's Quick Draw access button-->
+                            <Button Style="{StaticResource MaterialDesignFloatingActionLightButton}" ToolTipService.InitialShowDelay="0" ToolTip="Pick a word and drawing from the QuickDraw bank" Width="50" Height="50" Click="QuickDrawButton_Click"  Margin="20 0 0 0">
+                                <Grid Margin="0">
+                                    <materialDesign:PackIcon Width="25" Height="25" Kind="Google"/>
+                                </Grid>
+                            </Button>
+
+                            <!--Internet image search button
+
+                            <Button Style="{StaticResource MaterialDesignFloatingActionLightButton}" ToolTipService.InitialShowDelay="0" ToolTip="Enter a secret word to search the web" Width="50" Height="50" Name="InternetImageSearchButton" IsEnabled="False" Click="InternetImageSearchButton_Click" Margin="20 0 0 0">
+                                <Grid Margin="0">
+                                    <materialDesign:PackIcon Width="25" Height="25" Kind="Web"/>
+                                </Grid>
+                            </Button>-->
+
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!-- Drawer -->
+                    <local2:FenetreDessin Grid.ZIndex="1" MaxWidth="1200" x:Name="Drawer" SaveImage="ImageEditor_SaveImage"/>
+
+                    <!--Google's Quick Draw page-->
+                    <local:QuickDrawUC Grid.ZIndex="1" x:Name="QuickDrawViewer" SaveImage="ImageEditor_SaveImage"/>
+
+                    <!--Internet images browsing page
+                    <local:InternetImagesUC Grid.ZIndex="1" x:Name="InternetImagesViewer" SaveImage="ImageEditor_SaveImage"/>-->
+                </materialDesign:Transitioner>
+            </Grid>
+
+
+            <!-- Creation controls -->
+            <materialDesign:ColorZone Mode="Standard" DockPanel.Dock="Bottom">
+                <Grid>
+                    <Grid DockPanel.Dock="Bottom">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="4*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Orientation="Vertical">
+                            <!--Secret word-->
+                            <TextBox materialDesign:TextFieldAssist.HasClearButton="True" Margin="70 40 70 20" Style="{StaticResource MaterialDesignTextBox}" x:Name="SecretWord" materialDesign:HintAssist.Hint="Secret word e.g. Apple" TextChanged="Credentials_Changed" LostFocus="Update_SecretWord" Text="{Binding secretWord}"/>
+
+                            <!--Clues-->
+                            <TextBox Margin="70 20 70 30" Style="{StaticResource MaterialDesignTextBox}" VerticalScrollBarVisibility="Auto" MaxHeight="70" x:Name="Clues" TextWrapping="Wrap" AcceptsReturn="True" materialDesign:HintAssist.HelperText="Separate each hint by pressing 'Enter'"
+                             materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="Hints e.g. Fruit&#x0a;Snack&#x0a;Doctor" TextChanged="Credentials_Changed"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1" Orientation="Vertical">
+                            <!--Difficulty-->
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="70 0 70 0">
+                                <Label VerticalAlignment="Center" Margin="0,37,0,0">Level of difficulty</Label>
+                                <Slider VerticalAlignment="Center" Style="{StaticResource MaterialDesignDiscreteHorizontalSlider}" Minimum ="1" Maximum="3" TickFrequency="1" x:Name="Difficulty" Width="100" ValueChanged="Credentials_Changed"/>
+                            </StackPanel>
+                            <TextBlock Margin="0 0 0 10" Foreground="{StaticResource MaterialDesignBodyLight}" HorizontalAlignment="Center" x:Name="DifficultyDescription"
+                    Style="{StaticResource MaterialDesignCaptionTextBlock}">
+                        Players will have 15 seconds and 5 (3 in ffa) trials to guess
+                            </TextBlock>
+
+
+                            <!--Drawing mode-->
+                            <ComboBox SelectedIndex="0" materialDesign:HintAssist.HelperText="Drawing mode" Margin="100 20 100 0" Tag="0" VerticalAlignment="Center" Name="drawingMode" SelectionChanged="Credentials_Changed">
+                                <ComboBoxItem Tag="0">Classic</ComboBoxItem>
+                                <ComboBoxItem Tag="1">Random</ComboBoxItem>
+                                <ComboBoxItem Tag="2">Panoramic</ComboBoxItem>
+                                <ComboBoxItem Tag="3">Center</ComboBoxItem>
+                            </ComboBox>
+
+                            <!--drawing direction-->
+                            <ComboBox SelectedIndex="0" Margin="100 20 100 20" Tag="0" VerticalAlignment="Center" Name="drawingDirection" materialDesign:HintAssist.Hint="Choose a drawing direction" SelectionChanged="Credentials_Changed" Visibility="Collapsed">
+                                <ComboBoxItem Tag="0" Name="panoramicDrawingMode1">Left to right</ComboBoxItem>
+                                <ComboBoxItem Tag="1" Name="panoramicDrawingMode2">Right to left</ComboBoxItem>
+                                <ComboBoxItem Tag="2" Name="panoramicDrawingMode3">Top to bottom</ComboBoxItem>
+                                <ComboBoxItem Tag="3" Name="panoramicDrawingMode4">Bottom to top</ComboBoxItem>
+                                <ComboBoxItem Tag="4" Name="centerDrawingMode1">Inside out</ComboBoxItem>
+                                <ComboBoxItem Tag="5" Name="centerDrawingMode2">Outside in</ComboBoxItem>
+                            </ComboBox>
+                        </StackPanel>
+
+
+                        <StackPanel Margin="0 0 0 10" Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
+                            <!--Error text-->
+                            <TextBlock x:Name="ErrorText"  Foreground="Red" FontSize="10" TextAlignment="Center" Margin="15"/>
+
+                            <!--Submit button-->
+                            <Button x:Name="SubmitButton" Foreground="White" Margin="0 0 0 10" Height="35" Click="Submit_Button_Click" IsEnabled="False" Style="{StaticResource MaterialDesignRaisedAccentButton}"  Width="80">
+                                Create
+                            </Button>
+                        </StackPanel>
+
+                    </Grid>
+                    <!--Progress bar-->
+                    <ProgressBar Style="{StaticResource MaterialDesignCircularProgressBar}"
+                                 HorizontalAlignment="Center"
+                                 Foreground="Red" Value="0" IsIndeterminate="True" Margin="0 0 0 20"
+                                 Width="100" Name="CreationProgress" Visibility="Hidden"/>
+                    <!--Snackbar-->
+                    <materialDesign:Snackbar DockPanel.Dock="Bottom" HorizontalAlignment="Center" x:Name="Snackbar">
+                        <materialDesign:SnackbarMessage Content="Game created succesfully. Thank you for contributing!" ActionContent="OK" ActionClick="CloseSnackbar"/>
+                    </materialDesign:Snackbar>
+                </Grid>
+
+            </materialDesign:ColorZone>
+        </DockPanel>
+
+        <!--Potrace options dialog
+        <materialDesign:DialogHost Name="PotraceOptionsDialog" DockPanel.Dock="Bottom" DockPanel.ZIndex ="1" CloseOnClickAway="False" DialogOpened="PotraceOptionsDialog_DialogOpened">
+            <materialDesign:DialogHost.DialogContent>
+                <StackPanel Margin="20">
+                    <TextBlock Style="{StaticResource MaterialDesignSubtitle2TextBlock}" Margin="0,0,0,17">Personalize your image's transformation</TextBlock>
+                    <CheckBox Style="{StaticResource MaterialDesignAccentCheckBox}" IsChecked="True" Name="OptimzeCurve">Optimize curves</CheckBox>
+                    <CheckBox Style="{StaticResource MaterialDesignAccentCheckBox}" IsChecked="False" Name="WhiteShapeOpaque">Make white shapes opaque</CheckBox>
+                    <CheckBox Style="{StaticResource MaterialDesignAccentCheckBox}" IsChecked="False" Name="InvertColors">Invert colors</CheckBox>
+                    <StackPanel Orientation="Horizontal">
+                        <CheckBox Style="{StaticResource MaterialDesignAccentCheckBox}" IsChecked="False" Name="Rotate">Rotate (counterclockwise)</CheckBox>
+                        <TextBox Width="80" materialDesign:HintAssist.Hint="90°" Name="Rotation" IsEnabled="{Binding ElementName=Rotate, Path=IsChecked}"></TextBox>
+                    </StackPanel>
+                    <Button Height="35" Foreground="White" x:Name="PotraceLoadButton" Click="Potrace_Load_Click" Style="{StaticResource MaterialDesignRaisedAccentButton}"  Width="80" Margin="0,10,0,0">
+                        Load
+                    </Button>
+                </StackPanel>
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>-->
+        
+        <!--Tutorial dialog-->
+        <materialDesign:DialogHost DockPanel.ZIndex ="2"  Margin="0 0 0 0" Name="TutorialDialog" CloseOnClickAway="True" DialogClosing="resetWhenTutorialClosed">
+            <materialDesign:DialogHost.DialogContent>
+
+                <local1:TutorialDialogContentUC DockPanel.ZIndex ="2" x:Name="TutorialUC"/>
+
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
+    </Grid>
+
+</UserControl>

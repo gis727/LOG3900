@@ -1,0 +1,61 @@
+﻿<UserControl x:Class="FMUD.Views.LiveGame.StatsUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:converters="clr-namespace:FMUD.Converters"
+             Padding="10"
+             mc:Ignorable="d" >
+    <UserControl.Resources>
+        <converters:TimeLeftConverter x:Key="timeLeftConverter" />
+        <converters:TimeLeftColorConverter x:Key="timeLeftColorConverter" />
+    </UserControl.Resources>
+
+    <Grid Height="75">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="450"/>
+            <ColumnDefinition Width="380"/>
+            <ColumnDefinition Width="450"/>
+        </Grid.ColumnDefinitions>
+
+        <!--Points-->
+
+        <StackPanel Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="0" Orientation="Vertical" HorizontalAlignment="Left">
+            <TextBlock Margin="0 0 0 -12" Opacity="0.6" Foreground="White" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Score" FontSize="15">
+
+            </TextBlock>
+
+            <TextBlock FontSize="45" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignHeadline4TextBlock}" x:Name="Score" Text="{Binding score}">
+            </TextBlock>
+        </StackPanel>
+
+
+        <!--Time left-->
+        <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Border>
+                <Grid>
+                    <materialDesign:PackIcon Foreground="White" Opacity="0.2" VerticalAlignment="Center" Kind="Schedule" Height="50" HorizontalAlignment="Center" Width="50">
+                        <materialDesign:PackIcon.RenderTransform>
+                            <ScaleTransform ScaleX="3.2" ScaleY="3.2" CenterX="25" CenterY="25">
+                            </ScaleTransform>
+                        </materialDesign:PackIcon.RenderTransform>
+                    </materialDesign:PackIcon>
+                    <TextBlock FontWeight="Medium" Grid.ZIndex ="2"  FontSize="50" Foreground="{Binding timeLeft, Converter={StaticResource timeLeftColorConverter}}" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignHeadline4TextBlock}" x:Name="TimeLeft"
+                    Text="{Binding timeLeft, Converter={StaticResource timeLeftConverter}}"/>
+                </Grid>
+            </Border>
+        </StackPanel>
+
+        <!--Trials left-->
+        <StackPanel Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" Margin="0"  Orientation="Vertical" HorizontalAlignment="Right">
+            <TextBlock Margin="0 0 0 -12" Foreground="White" Opacity="0.6" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" Text=" Guesses left" FontSize="15"/>
+            <TextBlock FontWeight="Bold" Foreground="White" HorizontalAlignment="Center" FontSize="45" Style="{StaticResource MaterialDesignHeadline4TextBlock}" x:Name="TriesLeft"
+                   Text="{Binding trialsLeft}"/>
+        </StackPanel>
+        
+    </Grid>
+</UserControl>
